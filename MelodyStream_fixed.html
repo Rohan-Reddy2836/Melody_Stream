@@ -1,0 +1,2790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MelodyStream - Your Music Hub</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+    :root {
+
+        --bg-primary: #0f0f0f;
+
+        --bg-secondary: #1a1a1a;
+
+        --bg-tertiary: #242424;
+
+        --text-primary: #ffffff;
+
+        --text-secondary: #b3b3b3;
+
+        --text-muted: #808080;
+
+        --accent: #1db954;
+
+        --accent-hover: #1ed760;
+
+        --card-bg: #181818;
+
+        --border: #2a2a2a;
+
+        --shadow: rgba(0, 0, 0, 0.5);
+
+    }
+
+
+
+    * {
+
+        margin: 0;
+
+        padding: 0;
+
+        box-sizing: border-box;
+
+    }
+
+
+
+    body {
+
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+        background-color: var(--bg-primary);
+
+        color: var(--text-primary);
+
+        line-height: 1.5;
+
+        min-height: 100vh;
+
+    }
+
+
+
+    a {
+
+        color: inherit;
+
+        text-decoration: none;
+
+    }
+
+
+
+    img {
+
+        max-width: 100%;
+
+        height: auto;
+
+        display: block;
+
+    }
+
+
+
+    .container {
+
+        max-width: 1400px;
+
+        margin: 0 auto;
+
+        padding: 0 24px;
+
+    }
+
+
+
+    /* Header */
+
+    header {
+
+        padding: 24px 0;
+
+        position: sticky;
+
+        top: 0;
+
+        background: rgba(15, 15, 15, 0.9);
+
+        backdrop-filter: blur(10px);
+
+        z-index: 100;
+
+        border-bottom: 1px solid var(--border);
+
+    }
+
+
+
+    .header-content {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+    }
+
+
+
+    .logo {
+
+        font-size: 1.5rem;
+
+        font-weight: 700;
+
+        background: linear-gradient(90deg, var(--accent), #1ed760);
+
+        -webkit-background-clip: text;
+
+        background-clip: text;
+
+        -webkit-text-fill-color: transparent;
+
+    }
+
+
+
+    .nav-links {
+
+        display: flex;
+
+        gap: 32px;
+
+        list-style: none;
+
+    }
+
+
+
+    .nav-links a {
+
+        font-weight: 500;
+
+        color: var(--text-secondary);
+
+        transition: color 0.2s;
+
+    }
+
+
+
+    .nav-links a:hover {
+
+        color: var(--text-primary);
+
+    }
+
+
+
+    .user-actions {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 16px;
+
+    }
+
+
+
+    .btn {
+
+        padding: 10px 24px;
+
+        border-radius: 500px;
+
+        font-weight: 600;
+
+        font-size: 0.875rem;
+
+        cursor: pointer;
+
+        transition: all 0.2s;
+
+        border: none;
+
+    }
+
+
+
+    .btn-primary {
+
+        background: var(--accent);
+
+        color: #000;
+
+    }
+
+
+
+    .btn-primary:hover {
+
+        background: var(--accent-hover);
+
+        transform: scale(1.02);
+
+    }
+
+
+
+    .btn-secondary {
+
+        background: transparent;
+
+        color: var(--text-primary);
+
+        border: 1px solid var(--border);
+
+    }
+
+
+
+    .btn-secondary:hover {
+
+        background: var(--bg-tertiary);
+
+    }
+
+
+
+    /* Main Content */
+
+    main {
+
+        padding: 32px 0 80px;
+
+    }
+
+
+
+    .section-header {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-bottom: 24px;
+
+    }
+
+
+
+    .section-title {
+
+        font-size: 1.75rem;
+
+        font-weight: 700;
+
+    }
+
+
+
+    .section-link {
+
+        color: var(--accent);
+
+        font-weight: 600;
+
+        font-size: 0.875rem;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 4px;
+
+    }
+
+
+
+    .section-link:hover {
+
+        text-decoration: underline;
+
+    }
+
+
+
+    /* Card Grids */
+
+    .card-grid {
+
+        display: grid;
+
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+
+        gap: 24px;
+
+    }
+
+
+
+    @media (max-width: 768px) {
+
+        .card-grid {
+
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+
+            gap: 16px;
+
+        }
+
+    }
+
+
+
+    .card {
+
+        background: var(--card-bg);
+
+        border-radius: 12px;
+
+        overflow: hidden;
+
+        transition: transform 0.3s, box-shadow 0.3s;
+
+        border: 1px solid var(--border);
+
+    }
+
+
+
+    .card:hover {
+
+        transform: translateY(-4px);
+
+        box-shadow: 0 12px 24px var(--shadow);
+
+        border-color: var(--accent);
+
+    }
+
+
+
+    .card-image {
+
+        width: 100%;
+
+        aspect-ratio: 1;
+
+        object-fit: cover;
+
+        background: var(--bg-tertiary);
+
+    }
+
+
+
+    .card-content {
+
+        padding: 16px;
+
+    }
+
+
+
+    .card-tag {
+
+        display: inline-block;
+
+        font-size: 0.625rem;
+
+        font-weight: 700;
+
+        padding: 4px 8px;
+
+        border-radius: 4px;
+
+        margin-bottom: 8px;
+
+        text-transform: uppercase;
+
+        letter-spacing: 0.5px;
+
+    }
+
+
+
+    .tag-new { background: #1db95420; color: var(--accent); }
+
+    .tag-updated { background: #ff950020; color: #ff9500; }
+
+    .tag-album { background: #ff2d5520; color: #ff2d55; }
+
+    .tag-hot { background: #ff2d5520; color: #ff2d55; }
+
+
+
+    .card-title {
+
+        font-size: 1rem;
+
+        font-weight: 600;
+
+        margin-bottom: 4px;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+    }
+
+
+
+    .card-subtitle {
+
+        font-size: 0.8125rem;
+
+        color: var(--text-secondary);
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+    }
+
+
+
+    /* Recently Played - Horizontal Scroll */
+
+    .scroll-container {
+
+        display: flex;
+
+        gap: 16px;
+
+        overflow-x: auto;
+
+        padding: 8px 8px 16px;
+
+        scrollbar-width: thin;
+
+        scrollbar-color: var(--border) transparent;
+
+    }
+
+
+
+    .scroll-container::-webkit-scrollbar {
+
+        height: 6px;
+
+    }
+
+
+
+    .scroll-container::-webkit-scrollbar-track {
+
+        background: transparent;
+
+    }
+
+
+
+    .scroll-container::-webkit-scrollbar-thumb {
+
+        background: var(--border);
+
+        border-radius: 3px;
+
+    }
+
+
+
+    .scroll-card {
+
+        flex: 0 0 auto;
+
+        width: 200px;
+
+        background: var(--card-bg);
+
+        border-radius: 12px;
+
+        overflow: hidden;
+
+        border: 1px solid var(--border);
+
+        transition: transform 0.3s;
+
+    }
+
+
+
+    .scroll-card:hover {
+
+        transform: translateY(-4px);
+
+    }
+
+
+
+    .scroll-card-image {
+
+        width: 100%;
+
+        aspect-ratio: 1;
+
+        object-fit: cover;
+
+    }
+
+
+
+    .scroll-card-content {
+
+        padding: 16px;
+
+    }
+
+
+
+    .scroll-card-title {
+
+        font-size: 0.9375rem;
+
+        font-weight: 600;
+
+        margin-bottom: 4px;
+
+    }
+
+
+
+    .scroll-card-subtitle {
+
+        font-size: 0.8125rem;
+
+        color: var(--text-secondary);
+
+    }
+
+
+
+    /* Latest Songs - Two Column Layout */
+
+    .two-column-grid {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 24px;
+
+    }
+
+
+
+    @media (max-width: 768px) {
+
+        .two-column-grid {
+
+            grid-template-columns: 1fr;
+
+        }
+
+    }
+
+
+
+    .song-list {
+
+        background: var(--card-bg);
+
+        border-radius: 12px;
+
+        border: 1px solid var(--border);
+
+        overflow: hidden;
+
+    }
+
+
+
+    .song-item {
+
+        display: flex;
+
+        align-items: center;
+
+        padding: 16px;
+
+        border-bottom: 1px solid var(--border);
+
+        transition: background 0.2s;
+
+    }
+
+
+
+    .song-item:last-child {
+
+        border-bottom: none;
+
+    }
+
+
+
+    .song-item:hover {
+
+        background: var(--bg-tertiary);
+
+    }
+
+
+
+    .song-number {
+
+        font-size: 1.25rem;
+
+        font-weight: 300;
+
+        color: var(--text-muted);
+
+        width: 40px;
+
+        text-align: center;
+
+    }
+
+
+
+    .song-info {
+
+        flex: 1;
+
+        padding: 0 16px;
+
+        min-width: 0;
+
+    }
+
+
+
+    .song-title {
+
+        font-weight: 500;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+    }
+
+
+
+    .song-artist {
+
+        font-size: 0.8125rem;
+
+        color: var(--text-secondary);
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+    }
+
+
+
+    .song-duration {
+
+        font-size: 0.8125rem;
+
+        color: var(--text-muted);
+
+        padding-right: 16px;
+
+    }
+
+
+
+    /* Favorite Music Grid */
+
+    .favorite-grid {
+
+        display: grid;
+
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+
+        gap: 16px;
+
+    }
+
+
+
+    @media (max-width: 768px) {
+
+        .favorite-grid {
+
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+
+        }
+
+    }
+
+
+
+    .favorite-card {
+
+        background: var(--card-bg);
+
+        border-radius: 12px;
+
+        padding: 20px 16px;
+
+        border: 1px solid var(--border);
+
+        text-align: center;
+
+        transition: all 0.3s;
+
+    }
+
+
+
+    .favorite-card:hover {
+
+        border-color: var(--accent);
+
+        transform: translateY(-2px);
+
+    }
+
+
+
+    .favorite-icon {
+
+        width: 48px;
+
+        height: 48px;
+
+        border-radius: 12px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        margin: 0 auto 12px;
+
+        font-size: 1.5rem;
+
+    }
+
+
+
+    .favorite-title {
+
+        font-size: 0.9375rem;
+
+        font-weight: 600;
+
+        margin-bottom: 4px;
+
+    }
+
+
+
+    .favorite-subtitle {
+
+        font-size: 0.75rem;
+
+        color: var(--text-secondary);
+
+    }
+
+
+
+    /* Section Backgrounds */
+
+    .section {
+
+        margin-bottom: 48px;
+
+    }
+
+
+
+    /* Footer */
+
+    footer {
+
+        padding: 48px 0 24px;
+
+        border-top: 1px solid var(--border);
+
+        background: var(--bg-secondary);
+
+    }
+
+
+
+    .footer-content {
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        justify-content: space-between;
+
+        gap: 32px;
+
+        margin-bottom: 32px;
+
+    }
+
+
+
+    .footer-column {
+
+        flex: 1;
+
+        min-width: 180px;
+
+    }
+
+
+
+    .footer-title {
+
+        font-size: 0.75rem;
+
+        font-weight: 600;
+
+        text-transform: uppercase;
+
+        letter-spacing: 1px;
+
+        color: var(--text-muted);
+
+        margin-bottom: 16px;
+
+    }
+
+
+
+    .footer-links {
+
+        list-style: none;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 12px;
+
+    }
+
+
+
+    .footer-links a {
+
+        color: var(--text-secondary);
+
+        font-size: 0.875rem;
+
+        transition: color 0.2s;
+
+    }
+
+
+
+    .footer-links a:hover {
+
+        color: var(--text-primary);
+
+    }
+
+
+
+    .footer-bottom {
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        padding-top: 24px;
+
+        border-top: 1px solid var(--border);
+
+        color: var(--text-muted);
+
+        font-size: 0.75rem;
+
+    }
+
+
+
+    .footer-legal {
+
+        display: flex;
+
+        gap: 24px;
+
+    }
+
+
+
+    .footer-legal a {
+
+        color: var(--text-muted);
+
+        transition: color 0.2s;
+
+    }
+
+
+
+    .footer-legal a:hover {
+
+        color: var(--text-primary);
+
+    }
+
+
+
+    /* Utility Classes */
+
+    .visually-hidden {
+
+        position: absolute;
+
+        width: 1px;
+
+        height: 1px;
+
+        padding: 0;
+
+        margin: -1px;
+
+        overflow: hidden;
+
+        clip: rect(0, 0, 0, 0);
+
+        white-space: nowrap;
+
+        border: 0;
+
+    }
+
+
+
+    /* Animation */
+
+    @keyframes fadeInUp {
+
+        from {
+
+            opacity: 0;
+
+            transform: translateY(20px);
+
+        }
+
+        to {
+
+            opacity: 1;
+
+            transform: translateY(0);
+
+        }
+
+    }
+
+
+
+    .section {
+
+        animation: fadeInUp 0.6s ease-out forwards;
+
+    }
+
+
+
+    .section:nth-child(1) { animation-delay: 0.1s; }
+
+    .section:nth-child(2) { animation-delay: 0.2s; }
+
+    .section:nth-child(3) { animation-delay: 0.3s; }
+
+    .section:nth-child(4) { animation-delay: 0.4s; }
+
+    .section:nth-child(5) { animation-delay: 0.5s; }
+
+    .section:nth-child(6) { animation-delay: 0.6s; }
+
+    .section:nth-child(7) { animation-delay: 0.7s; }
+
+    .section:nth-child(8) { animation-delay: 0.8s; }
+
+    .section:nth-child(9) { animation-delay: 0.9s; }
+
+    .section:nth-child(10) { animation-delay: 1s; }
+
+
+
+    /* Placeholder Images */
+
+    .placeholder-img {
+
+        background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        color: var(--text-muted);
+
+        font-size: 2rem;
+
+    }
+
+
+
+    /* Responsive Adjustments */
+
+    @media (max-width: 1024px) {
+
+        .container {
+
+            padding: 0 20px;
+
+        }
+
+    }
+
+
+
+    @media (max-width: 768px) {
+
+        header {
+
+            padding: 16px 0;
+
+        }
+
+
+
+        .nav-links {
+
+            display: none;
+
+        }
+
+
+
+        .section-title {
+
+            font-size: 1.5rem;
+
+        }
+
+
+
+        main {
+
+            padding: 24px 0 60px;
+
+        }
+
+
+
+        .section {
+
+            margin-bottom: 32px;
+
+        }
+
+    }
+
+</style>
+</head>
+<body>
+
+
+
+
+
+<header>
+
+    <div class="container header-content">
+
+        <a href="#" class="logo">MelodyStream</a>
+
+        <nav>
+
+            <ul class="nav-links">
+
+                <li><a href="#">Home</a></li>
+
+                <li><a href="#">Browse</a></li>
+
+                <li><a href="#">Radio</a></li>
+
+                <li><a href="#">Library</a></li>
+
+                <li><a href="#">Search</a></li>
+
+            </ul>
+
+        </nav>
+
+        <div class="user-actions">
+
+            <button class="btn btn-secondary">Sign In</button>
+
+            <button class="btn btn-primary">Try Free</button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<main class="container">
+
+    <!-- New & Updated Section -->
+
+    <section class="section" aria-labelledby="new-updated-title">
+
+        <div class="section-header">
+
+            <h2 id="new-updated-title" class="section-title">New & Updated</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="card-grid" role="list">
+
+            <!-- Card 1 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a5c2e 0%, #0d3b1e
+100%);" aria-hidden="true">🎵</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-new">NEW</span>
+
+                    <h3 class="card-title">Fresh Sounds</h3>
+
+                    <p class="card-subtitle">MelodyStream Reggae</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 2 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c1a1a 0%, #3b0d0d
+100%);" aria-hidden="true">🎧</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-album">ALBUM</span>
+
+                    <h3 class="card-title">Just Dropped</h3>
+
+                    <p class="card-subtitle">Global Hits</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 3 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a3c5c 0%, #0d243b
+100%);" aria-hidden="true">📈</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-updated">UPDATED</span>
+
+                    <h3 class="card-title">Trending Now</h3>
+
+                    <p class="card-subtitle">Today's Top Hits</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 4 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #3d1a5c 0%, #240d3b
+100%);" aria-hidden="true">🎤</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-new">NEW</span>
+
+                    <h3 class="card-title">Weekly Update</h3>
+
+                    <p class="card-subtitle">Rap Life</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 5 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a5c4a 0%, #0d3b2e
+100%);" aria-hidden="true">🎸</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-new">NEW</span>
+
+                    <h3 class="card-title">Fresh Vibes</h3>
+
+                    <p class="card-subtitle">Indie Vibes</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 6 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c4a1a 0%, #3b2e0d
+100%);" aria-hidden="true">🔥</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-hot">HOT</span>
+
+                    <h3 class="card-title">Popular Now</h3>
+
+                    <p class="card-subtitle">Pop Rising</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 7 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c1a3d 0%, #3b0d24
+100%);" aria-hidden="true">💃</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-new">NEW</span>
+
+                    <h3 class="card-title">Updated Mix</h3>
+
+                    <p class="card-subtitle">Dance Hits</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 8 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a4a5c 0%, #0d2e3b
+100%);" aria-hidden="true">🎤</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-album">ALBUM</span>
+
+                    <h3 class="card-title">New Artist</h3>
+
+                    <p class="card-subtitle">Fresh Voices</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 9 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #2d1a5c 0%, #1b0d3b
+100%);" aria-hidden="true">🌙</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-new">NEW</span>
+
+                    <h3 class="card-title">Daily Mix</h3>
+
+                    <p class="card-subtitle">Chill Mode</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 10 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #4a5c1a 0%, #2e3b0d
+100%);" aria-hidden="true">✨</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-updated">UPDATED</span>
+
+                    <h3 class="card-title">Editor's Pick</h3>
+
+                    <p class="card-subtitle">Hits India</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Recently Played Section -->
+
+    <section class="section" aria-labelledby="recently-played-title">
+
+        <div class="section-header">
+
+            <h2 id="recently-played-title" class="section-title">Recently Played</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="scroll-container" role="list">
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #1a1a2e 0%,
+#16213e 100%);" aria-hidden="true">🌃</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Night Drive</h3>
+
+                    <p class="scroll-card-subtitle">Synthwave</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #0f3460 0%,
+#1a1a2e 100%);" aria-hidden="true">🎹</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Peaceful Piano</h3>
+
+                    <p class="scroll-card-subtitle">Instrumental</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #e94560 0%,
+#1a1a2e 100%);" aria-hidden="true">💪</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Workout Hits</h3>
+
+                    <p class="scroll-card-subtitle">Energy</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #1a1a2e 0%,
+#0f3460 100%);" aria-hidden="true">☕</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Chill Beats</h3>
+
+                    <p class="scroll-card-subtitle">Lo-Fi</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #16213e 0%,
+#0f3460 100%);" aria-hidden="true">🏃</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Morning Run</h3>
+
+                    <p class="scroll-card-subtitle">Fitness</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #1a1a2e 0%,
+#16213e 100%);" aria-hidden="true">🎷</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Jazz Café</h3>
+
+                    <p class="scroll-card-subtitle">Jazz</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #0f3460 0%,
+#1a1a2e 100%);" aria-hidden="true">🧠</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Deep Focus</h3>
+
+                    <p class="scroll-card-subtitle">Study</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #16213e 0%,
+#0f3460 100%);" aria-hidden="true">🌙</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Late Night</h3>
+
+                    <p class="scroll-card-subtitle">Pop</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Latest Songs Section -->
+
+    <section class="section" aria-labelledby="latest-songs-title">
+
+        <div class="section-header">
+
+            <h2 id="latest-songs-title" class="section-title">Latest Songs</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="two-column-grid">
+
+            <div class="song-list" role="list" aria-label="Latest Songs">
+
+                <div class="song-item" role="listitem">
+                    <span class="song-number">1</span>
+                    <div class="song-info">
+                        <div class="song-title">Blinding Lights</div>
+                        <div class="song-artist">The Weeknd</div>
+                    </div>
+                    <span class="song-duration">3:20</span>
+                </div>
+
+                <div class="song-item" role="listitem">
+                    <span class="song-number">2</span>
+                    <div class="song-info">
+                        <div class="song-title">Calm Down</div>
+                        <div class="song-artist">Rema</div>
+                    </div>
+                    <span class="song-duration">3:20</span>
+                </div>
+
+                <div class="song-item" role="listitem">
+                    <span class="song-number">3</span>
+                    <div class="song-info">
+                        <div class="song-title">Shape of You</div>
+                        <div class="song-artist">Ed Sheeran</div>
+                    </div>
+                    <span class="song-duration">3:53</span>
+                </div>
+
+                <div class="song-item" role="listitem">
+                    <span class="song-number">4</span>
+                    <div class="song-info">
+                        <div class="song-title">Heat Waves</div>
+                        <div class="song-artist">Glass Animals</div>
+                    </div>
+                    <span class="song-duration">3:58</span>
+                </div>
+
+            </div>
+
+            <div class="song-list" role="list" aria-label="Regional Hits">
+
+                <div class="song-item" role="listitem">
+                    <span class="song-number">1</span>
+                    <div class="song-info">
+                        <div class="song-title">Jhol - Acoustic</div>
+                        <div class="song-artist">Annural Khalid</div>
+                    </div>
+                    <span class="song-duration">4:12</span>
+                </div>
+
+                <div class="song-item" role="listitem">
+                    <span class="song-number">2</span>
+                    <div class="song-info">
+                        <div class="song-title">Neeli Meghamulalo</div>
+                        <div class="song-artist">Sid Sriram</div>
+                    </div>
+                    <span class="song-duration">3:45</span>
+                </div>
+
+                <div class="song-item" role="listitem">
+                    <span class="song-number">3</span>
+                    <div class="song-info">
+                        <div class="song-title">Arz Kiya</div>
+                        <div class="song-artist">Hasan Raheem</div>
+                    </div>
+                    <span class="song-duration">3:28</span>
+                </div>
+
+                <div class="song-item" role="listitem">
+                    <span class="song-number">4</span>
+                    <div class="song-info">
+                        <div class="song-title">Kammani</div>
+                        <div class="song-artist">Anirudh Ravichander</div>
+                    </div>
+                    <span class="song-duration">4:05</span>
+                </div>
+
+                <div class="song-item" role="listitem">
+                    <span class="song-number">5</span>
+                    <div class="song-info">
+                        <div class="song-title">Apocalypse</div>
+                        <div class="song-artist">Cigarettes After Sex</div>
+                    </div>
+                    <span class="song-duration">4:50</span>
+                </div>
+
+                <div class="song-item" role="listitem">
+                    <span class="song-number">6</span>
+                    <div class="song-info">
+                        <div class="song-title">Cinnamon Girl</div>
+                        <div class="song-artist">Lana Del Rey</div>
+                    </div>
+                    <span class="song-duration">4:58</span>
+                </div>
+
+                <div class="song-item" role="listitem">
+                    <span class="song-number">7</span>
+                    <div class="song-info">
+                        <div class="song-title">Gaaju Bomma</div>
+                        <div class="song-artist">Sid Sriram</div>
+                    </div>
+                    <span class="song-duration">3:35</span>
+                </div>
+
+                <div class="song-item" role="listitem">
+                    <span class="song-number">8</span>
+                    <div class="song-info">
+                        <div class="song-title">Finding Her</div>
+                        <div class="song-artist">Jubin Nautiyal</div>
+                    </div>
+                    <span class="song-duration">4:22</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Favorite Music Section -->
+
+    <section class="section" aria-labelledby="favorite-music-title">
+
+        <div class="section-header">
+
+            <h2 id="favorite-music-title" class="section-title">Favorite Music</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="favorite-grid" role="list">
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);"
+aria-hidden="true">❤️</div>
+
+                <h3 class="favorite-title">Top Hits</h3>
+
+                <p class="favorite-subtitle">Love</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #ff9f43 0%, #ee8a33 100%);"
+aria-hidden="true">💕</div>
+
+                <h3 class="favorite-title">Romantic</h3>
+
+                <p class="favorite-subtitle">Love</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #54a0ff 0%, #3d8ce8 100%);"
+aria-hidden="true">🎤</div>
+
+                <h3 class="favorite-title">Hip-Hop</h3>
+
+                <p class="favorite-subtitle">Rap</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #5f27cd 0%, #4a1db8 100%);"
+aria-hidden="true">🎪</div>
+
+                <h3 class="favorite-title">EDM Party</h3>
+
+                <p class="favorite-subtitle">Dance</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);"
+aria-hidden="true">🌹</div>
+
+                <h3 class="favorite-title">Romantic</h3>
+
+                <p class="favorite-subtitle">Love</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #00d2d3 0%, #00b8b9 100%);"
+aria-hidden="true">🎻</div>
+
+                <h3 class="favorite-title">Classical</h3>
+
+                <p class="favorite-subtitle">Calm</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #ff9f43 0%, #ee8a33 100%);"
+aria-hidden="true">📻</div>
+
+                <h3 class="favorite-title">Throwback</h3>
+
+                <p class="favorite-subtitle">90s</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #54a0ff 0%, #3d8ce8 100%);"
+aria-hidden="true">😢</div>
+
+                <h3 class="favorite-title">Sad Songs</h3>
+
+                <p class="favorite-subtitle">Mood</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #5f27cd 0%, #4a1db8 100%);"
+aria-hidden="true">🎬</div>
+
+                <h3 class="favorite-title">Bollywood Hits</h3>
+
+                <p class="favorite-subtitle">Indian</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #00d2d3 0%, #00b8b9 100%);"
+aria-hidden="true">🎊</div>
+
+                <h3 class="favorite-title">Punjabi Vibes</h3>
+
+                <p class="favorite-subtitle">Desi</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);"
+aria-hidden="true">✨</div>
+
+                <h3 class="favorite-title">Pop Forever</h3>
+
+                <p class="favorite-subtitle">Pop</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #ff9f43 0%, #ee8a33 100%);"
+aria-hidden="true">🎸</div>
+
+                <h3 class="favorite-title">Rock Legends</h3>
+
+                <p class="favorite-subtitle">Rock</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #54a0ff 0%, #3d8ce8 100%);"
+aria-hidden="true">🌃</div>
+
+                <h3 class="favorite-title">Late Night EDM</h3>
+
+                <p class="favorite-subtitle">Dance</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #5f27cd 0%, #4a1db8 100%);"
+aria-hidden="true">💔</div>
+
+                <h3 class="favorite-title">Heartbreak</h3>
+
+                <p class="favorite-subtitle">Mood</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #00d2d3 0%, #00b8b9 100%);"
+aria-hidden="true">✈️</div>
+
+                <h3 class="favorite-title">Travel Songs</h3>
+
+                <p class="favorite-subtitle">Journey</p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Recommendations Section -->
+
+    <section class="section" aria-labelledby="recommendations-title">
+
+        <div class="section-header">
+
+            <h2 id="recommendations-title" class="section-title">Recommendations</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="card-grid" role="list">
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a3c5c 0%, #0d243b
+100%);" aria-hidden="true">🧠</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Focus Flow</h3>
+
+                    <p class="card-subtitle">Work</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #3d1a5c 0%, #240d3b
+100%);" aria-hidden="true">📈</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Viral Hits</h3>
+
+                    <p class="card-subtitle">Trending</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a5c4a 0%, #0d3b2e
+100%);" aria-hidden="true">🎵</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Indie Radar</h3>
+
+                    <p class="card-subtitle">New</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c4a1a 0%, #3b2e0d
+100%);" aria-hidden="true">☕</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Chillhop</h3>
+
+                    <p class="card-subtitle">Relax</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c1a3d 0%, #3b0d24
+100%);" aria-hidden="true">🎉</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Party Mix</h3>
+
+                    <p class="card-subtitle">Dance</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a4a5c 0%, #0d2e3b
+100%);" aria-hidden="true">🎸</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Acoustic</h3>
+
+                    <p class="card-subtitle">Soft</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #2d1a5c 0%, #1b0d3b
+100%);" aria-hidden="true">🌍</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Global Top</h3>
+
+                    <p class="card-subtitle">Charts</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #4a5c1a 0%, #2e3b0d
+100%);" aria-hidden="true">🌙</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Late Vibes</h3>
+
+                    <p class="card-subtitle">Night</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- New Arrivals Section -->
+
+    <section class="section" aria-labelledby="new-arrivals-title">
+
+        <div class="section-header">
+
+            <h2 id="new-arrivals-title" class="section-title">New Arrivals</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="card-grid" role="list">
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a3c5c 0%, #0d243b
+100%);" aria-hidden="true">🆕</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Fresh Beats</h3>
+
+                    <p class="card-subtitle">2025</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #3d1a5c 0%, #240d3b
+100%);" aria-hidden="true">🎵</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">New Indie</h3>
+
+                    <p class="card-subtitle">Trending</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a5c4a 0%, #0d3b2e
+100%);" aria-hidden="true">📈</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Pop Rising</h3>
+
+                    <p class="card-subtitle">Charts</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c4a1a 0%, #3b2e0d
+100%);" aria-hidden="true">🎸</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Rock Now</h3>
+
+                    <p class="card-subtitle">Rock</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c1a3d 0%, #3b0d24
+100%);" aria-hidden="true">🎧</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">EDM Drop</h3>
+
+                    <p class="card-subtitle">Dance</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a4a5c 0%, #0d2e3b
+100%);" aria-hidden="true">🎤</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Indie Pop</h3>
+
+                    <p class="card-subtitle">Fresh</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #2d1a5c 0%, #1b0d3b
+100%);" aria-hidden="true">🌍</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Global</h3>
+
+                    <p class="card-subtitle">World</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #4a5c1a 0%, #2e3b0d
+100%);" aria-hidden="true">🎤</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">New Rap</h3>
+
+                    <p class="card-subtitle">Hip-Hop</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Liked Songs Section -->
+
+    <section class="section" aria-labelledby="liked-songs-title">
+
+        <div class="section-header">
+
+            <h2 id="liked-songs-title" class="section-title">Liked Songs</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="card-grid" role="list">
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a
+100%);" aria-hidden="true">❤️</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">My Favorites</h3>
+
+                    <p class="card-subtitle">Personal</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #54a0ff 0%, #3d8ce8
+100%);" aria-hidden="true">📊</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Top Played</h3>
+
+                    <p class="card-subtitle">Personal</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #ff9f43 0%, #ee8a33
+100%);" aria-hidden="true">💕</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Love Songs</h3>
+
+                    <p class="card-subtitle">Mood</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #00d2d3 0%, #00b8b9
+100%);" aria-hidden="true">☕</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Chill</h3>
+
+                    <p class="card-subtitle">Relax</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5f27cd 0%, #4a1db8
+100%);" aria-hidden="true">💪</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Workout</h3>
+
+                    <p class="card-subtitle">Energy</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e
+100%);" aria-hidden="true">😴</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Sleep</h3>
+
+                    <p class="card-subtitle">Calm</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #16213e 0%, #0f3460
+100%);" aria-hidden="true">🚗</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Road Trip</h3>
+
+                    <p class="card-subtitle">Travel</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e
+100%);" aria-hidden="true">🏆</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Old Gold</h3>
+
+                    <p class="card-subtitle">Classic</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Artist Picks Section -->
+
+    <section class="section" aria-labelledby="artist-picks-title">
+
+        <div class="section-header">
+
+            <h2 id="artist-picks-title" class="section-title">Artist Picks</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="card-grid" role="list">
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a3c5c 0%, #0d243b
+100%);" aria-hidden="true">🎵</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">A.R. Rahman</h3>
+
+                    <p class="card-subtitle">Indian</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #3d1a5c 0%, #240d3b
+100%);" aria-hidden="true">🌟</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">The Weeknd</h3>
+
+                    <p class="card-subtitle">Hits</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a5c4a 0%, #0d3b2e
+100%);" aria-hidden="true">💖</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Taylor Swift</h3>
+
+                    <p class="card-subtitle">Love</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c4a1a 0%, #3b2e0d
+100%);" aria-hidden="true">🎤</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Drake</h3>
+
+                    <p class="card-subtitle">Mood</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c1a3d 0%, #3b0d24
+100%);" aria-hidden="true">💛</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Coldplay</h3>
+
+                    <p class="card-subtitle">Yellow</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a4a5c 0%, #0d2e3b
+100%);" aria-hidden="true">✨</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Dua Lipa</h3>
+
+                    <p class="card-subtitle">Feel</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #2d1a5c 0%, #1b0d3b
+100%);" aria-hidden="true">🎸</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Ed Sheeran</h3>
+
+                    <p class="card-subtitle">Acoustic</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #4a5c1a 0%, #2e3b0d
+100%);" aria-hidden="true">🐉</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Imagine Dragons</h3>
+
+                    <p class="card-subtitle">Rock</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Podcasts Section -->
+
+    <section class="section" aria-labelledby="podcasts-title">
+
+        <div class="section-header">
+
+            <h2 id="podcasts-title" class="section-title">Podcasts</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="card-grid" role="list">
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a3c5c 0%, #0d243b
+100%);" aria-hidden="true">💻</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Tech Talks</h3>
+
+                    <p class="card-subtitle">Technology</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #3d1a5c 0%, #240d3b
+100%);" aria-hidden="true">📰</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Daily News</h3>
+
+                    <p class="card-subtitle">Current</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a5c4a 0%, #0d3b2e
+100%);" aria-hidden="true">🚀</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Startup Stories</h3>
+
+                    <p class="card-subtitle">Business</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c4a1a 0%, #3b2e0d
+100%);" aria-hidden="true">🧘</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Health Hub</h3>
+
+                    <p class="card-subtitle">Wellness</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c1a3d 0%, #3b0d24
+100%);" aria-hidden="true">📜</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">History</h3>
+
+                    <p class="card-subtitle">Education</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a4a5c 0%, #0d2e3b
+100%);" aria-hidden="true">😂</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Comedy Hour</h3>
+
+                    <p class="card-subtitle">Fun</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #2d1a5c 0%, #1b0d3b
+100%);" aria-hidden="true">🔍</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">True Crime</h3>
+
+                    <p class="card-subtitle">Stories</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #4a5c1a 0%, #2e3b0d
+100%);" aria-hidden="true">💪</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Motivation</h3>
+
+                    <p class="card-subtitle">Life</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div class="footer-column">
+
+                <h3 class="footer-title">Company</h3>
+
+                <ul class="footer-links">
+
+                    <li><a href="#">About</a></li>
+
+                    <li><a href="#">Careers</a></li>
+
+                    <li><a href="#">Press</a></li>
+
+                    <li><a href="#">Blog</a></li>
+
+                </ul>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h3 class="footer-title">Support</h3>
+
+                <ul class="footer-links">
+
+                    <li><a href="#">Help Center</a></li>
+
+                    <li><a href="#">Community</a></li>
+
+                    <li><a href="#">Accessibility</a></li>
+
+                    <li><a href="#">Contact Us</a></li>
+
+                </ul>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h3 class="footer-title">Legal</h3>
+
+                <ul class="footer-links">
+
+                    <li><a href="#">Privacy Policy</a></li>
+
+                    <li><a href="#">Terms of Service</a></li>
+
+                    <li><a href="#">Cookies</a></li>
+
+                    <li><a href="#">Licensing</a></li>
+
+                </ul>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h3 class="footer-title">Social</h3>
+
+                <ul class="footer-links">
+
+                    <li><a href="#">Instagram</a></li>
+
+                    <li><a href="#">Twitter</a></li>
+
+                    <li><a href="#">Facebook</a></li>
+
+                    <li><a href="#">YouTube</a></li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>© 2026 MelodyStream. All rights reserved.</p>
+
+            <div class="footer-legal">
+
+                <a href="#">Privacy Policy</a>
+
+                <a href="#">Terms of Service</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
