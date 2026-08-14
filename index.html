@@ -1,0 +1,3646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MelodyStream - Your Music Hub</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+    :root {
+
+        --bg-primary: #0f0f0f;
+
+        --bg-secondary: #1a1a1a;
+
+        --bg-tertiary: #242424;
+
+        --text-primary: #ffffff;
+
+        --text-secondary: #b3b3b3;
+
+        --text-muted: #808080;
+
+        --accent: #1db954;
+
+        --accent-hover: #1ed760;
+
+        --card-bg: #181818;
+
+        --border: #2a2a2a;
+
+        --shadow: rgba(0, 0, 0, 0.5);
+
+    }
+
+
+
+    * {
+
+        margin: 0;
+
+        padding: 0;
+
+        box-sizing: border-box;
+
+    }
+
+
+
+    body {
+
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+        background-color: var(--bg-primary);
+
+        color: var(--text-primary);
+
+        line-height: 1.5;
+
+        min-height: 100vh;
+
+    }
+
+
+
+    a {
+
+        color: inherit;
+
+        text-decoration: none;
+
+    }
+
+
+
+    img {
+
+        max-width: 100%;
+
+        height: auto;
+
+        display: block;
+
+    }
+
+
+
+    .container {
+
+        max-width: 1400px;
+
+        margin: 0 auto;
+
+        padding: 0 24px;
+
+    }
+
+
+
+    /* Header */
+
+    header {
+
+        padding: 24px 0;
+
+        position: sticky;
+
+        top: 0;
+
+        background: rgba(15, 15, 15, 0.9);
+
+        backdrop-filter: blur(10px);
+
+        z-index: 100;
+
+        border-bottom: 1px solid var(--border);
+
+    }
+
+
+
+    .header-content {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+    }
+
+
+
+    .logo {
+
+        font-size: 1.5rem;
+
+        font-weight: 700;
+
+        background: linear-gradient(90deg, var(--accent), #1ed760);
+
+        -webkit-background-clip: text;
+
+        background-clip: text;
+
+        -webkit-text-fill-color: transparent;
+
+    }
+
+
+
+    .nav-links {
+
+        display: flex;
+
+        gap: 32px;
+
+        list-style: none;
+
+    }
+
+
+
+    .nav-links a {
+
+        font-weight: 500;
+
+        color: var(--text-secondary);
+
+        transition: color 0.2s;
+
+    }
+
+
+
+    .nav-links a:hover {
+
+        color: var(--text-primary);
+
+    }
+
+
+
+    .user-actions {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 16px;
+
+    }
+
+
+
+    .btn {
+
+        padding: 10px 24px;
+
+        border-radius: 500px;
+
+        font-weight: 600;
+
+        font-size: 0.875rem;
+
+        cursor: pointer;
+
+        transition: all 0.2s;
+
+        border: none;
+
+    }
+
+
+
+    .btn-primary {
+
+        background: var(--accent);
+
+        color: #000;
+
+    }
+
+
+
+    .btn-primary:hover {
+
+        background: var(--accent-hover);
+
+        transform: scale(1.02);
+
+    }
+
+
+
+    .btn-secondary {
+
+        background: transparent;
+
+        color: var(--text-primary);
+
+        border: 1px solid var(--border);
+
+    }
+
+
+
+    .btn-secondary:hover {
+
+        background: var(--bg-tertiary);
+
+    }
+
+
+
+    /* Main Content */
+
+    main {
+
+        padding: 32px 0 80px;
+
+    }
+
+
+
+    .section-header {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-bottom: 24px;
+
+    }
+
+
+
+    .section-title {
+
+        font-size: 1.75rem;
+
+        font-weight: 700;
+
+    }
+
+
+
+    .section-link {
+
+        color: var(--accent);
+
+        font-weight: 600;
+
+        font-size: 0.875rem;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 4px;
+
+    }
+
+
+
+    .section-link:hover {
+
+        text-decoration: underline;
+
+    }
+
+
+
+    /* Card Grids */
+
+    .card-grid {
+
+        display: grid;
+
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+
+        gap: 24px;
+
+    }
+
+
+
+    @media (max-width: 768px) {
+
+        .card-grid {
+
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+
+            gap: 16px;
+
+        }
+
+    }
+
+
+
+    .card {
+
+        background: var(--card-bg);
+
+        border-radius: 12px;
+
+        overflow: hidden;
+
+        transition: transform 0.3s, box-shadow 0.3s;
+
+        border: 1px solid var(--border);
+
+    }
+
+
+
+    .card:hover {
+
+        transform: translateY(-4px);
+
+        box-shadow: 0 12px 24px var(--shadow);
+
+        border-color: var(--accent);
+
+    }
+
+
+
+    .card-image {
+
+        width: 100%;
+
+        aspect-ratio: 1;
+
+        object-fit: cover;
+
+        background: var(--bg-tertiary);
+
+    }
+
+
+
+    .card-content {
+
+        padding: 16px;
+
+    }
+
+
+
+    .card-tag {
+
+        display: inline-block;
+
+        font-size: 0.625rem;
+
+        font-weight: 700;
+
+        padding: 4px 8px;
+
+        border-radius: 4px;
+
+        margin-bottom: 8px;
+
+        text-transform: uppercase;
+
+        letter-spacing: 0.5px;
+
+    }
+
+
+
+    .tag-new { background: #1db95420; color: var(--accent); }
+
+    .tag-updated { background: #ff950020; color: #ff9500; }
+
+    .tag-album { background: #ff2d5520; color: #ff2d55; }
+
+    .tag-hot { background: #ff2d5520; color: #ff2d55; }
+
+
+
+    .card-title {
+
+        font-size: 1rem;
+
+        font-weight: 600;
+
+        margin-bottom: 4px;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+    }
+
+
+
+    .card-subtitle {
+
+        font-size: 0.8125rem;
+
+        color: var(--text-secondary);
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+    }
+
+
+
+    /* Recently Played - Horizontal Scroll */
+
+    .scroll-container {
+
+        display: flex;
+
+        gap: 16px;
+
+        overflow-x: auto;
+
+        padding: 8px 8px 16px;
+
+        scrollbar-width: thin;
+
+        scrollbar-color: var(--border) transparent;
+
+    }
+
+
+
+    .scroll-container::-webkit-scrollbar {
+
+        height: 6px;
+
+    }
+
+
+
+    .scroll-container::-webkit-scrollbar-track {
+
+        background: transparent;
+
+    }
+
+
+
+    .scroll-container::-webkit-scrollbar-thumb {
+
+        background: var(--border);
+
+        border-radius: 3px;
+
+    }
+
+
+
+    .scroll-card {
+
+        flex: 0 0 auto;
+
+        width: 200px;
+
+        background: var(--card-bg);
+
+        border-radius: 12px;
+
+        overflow: hidden;
+
+        border: 1px solid var(--border);
+
+        transition: transform 0.3s;
+
+    }
+
+
+
+    .scroll-card:hover {
+
+        transform: translateY(-4px);
+
+    }
+
+
+
+    .scroll-card-image {
+
+        width: 100%;
+
+        aspect-ratio: 1;
+
+        object-fit: cover;
+
+    }
+
+
+
+    .scroll-card-content {
+
+        padding: 16px;
+
+    }
+
+
+
+    .scroll-card-title {
+
+        font-size: 0.9375rem;
+
+        font-weight: 600;
+
+        margin-bottom: 4px;
+
+    }
+
+
+
+    .scroll-card-subtitle {
+
+        font-size: 0.8125rem;
+
+        color: var(--text-secondary);
+
+    }
+
+
+
+    /* Latest Songs - Two Column Layout */
+
+    .two-column-grid {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 24px;
+
+    }
+
+
+
+    @media (max-width: 768px) {
+
+        .two-column-grid {
+
+            grid-template-columns: 1fr;
+
+        }
+
+    }
+
+
+
+    .song-list {
+
+        background: var(--card-bg);
+
+        border-radius: 12px;
+
+        border: 1px solid var(--border);
+
+        overflow: hidden;
+
+    }
+
+
+
+    .song-item {
+
+        display: flex;
+
+        align-items: center;
+
+        padding: 16px;
+
+        border-bottom: 1px solid var(--border);
+
+        transition: background 0.2s;
+
+    }
+
+
+
+    .song-item:last-child {
+
+        border-bottom: none;
+
+    }
+
+
+
+    .song-item:hover {
+
+        background: var(--bg-tertiary);
+
+    }
+
+
+
+    .song-number {
+
+        font-size: 1.25rem;
+
+        font-weight: 300;
+
+        color: var(--text-muted);
+
+        width: 40px;
+
+        text-align: center;
+
+    }
+
+
+
+    .song-info {
+
+        flex: 1;
+
+        padding: 0 16px;
+
+        min-width: 0;
+
+    }
+
+
+
+    .song-title {
+
+        font-weight: 500;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+    }
+
+
+
+    .song-artist {
+
+        font-size: 0.8125rem;
+
+        color: var(--text-secondary);
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+    }
+
+
+
+    .song-duration {
+
+        font-size: 0.8125rem;
+
+        color: var(--text-muted);
+
+        padding-right: 16px;
+
+    }
+
+
+
+    /* Favorite Music Grid */
+
+    .favorite-grid {
+
+        display: grid;
+
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+
+        gap: 16px;
+
+    }
+
+
+
+    @media (max-width: 768px) {
+
+        .favorite-grid {
+
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+
+        }
+
+    }
+
+
+
+    .favorite-card {
+
+        background: var(--card-bg);
+
+        border-radius: 12px;
+
+        padding: 20px 16px;
+
+        border: 1px solid var(--border);
+
+        text-align: center;
+
+        transition: all 0.3s;
+
+    }
+
+
+
+    .favorite-card:hover {
+
+        border-color: var(--accent);
+
+        transform: translateY(-2px);
+
+    }
+
+
+
+    .favorite-icon {
+
+        width: 48px;
+
+        height: 48px;
+
+        border-radius: 12px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        margin: 0 auto 12px;
+
+        font-size: 1.5rem;
+
+    }
+
+
+
+    .favorite-title {
+
+        font-size: 0.9375rem;
+
+        font-weight: 600;
+
+        margin-bottom: 4px;
+
+    }
+
+
+
+    .favorite-subtitle {
+
+        font-size: 0.75rem;
+
+        color: var(--text-secondary);
+
+    }
+
+
+
+    /* Section Backgrounds */
+
+    .section {
+
+        margin-bottom: 48px;
+
+    }
+
+
+
+    /* Footer */
+
+    footer {
+
+        padding: 48px 0 24px;
+
+        border-top: 1px solid var(--border);
+
+        background: var(--bg-secondary);
+
+    }
+
+
+
+    .footer-content {
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        justify-content: space-between;
+
+        gap: 32px;
+
+        margin-bottom: 32px;
+
+    }
+
+
+
+    .footer-column {
+
+        flex: 1;
+
+        min-width: 180px;
+
+    }
+
+
+
+    .footer-title {
+
+        font-size: 0.75rem;
+
+        font-weight: 600;
+
+        text-transform: uppercase;
+
+        letter-spacing: 1px;
+
+        color: var(--text-muted);
+
+        margin-bottom: 16px;
+
+    }
+
+
+
+    .footer-links {
+
+        list-style: none;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 12px;
+
+    }
+
+
+
+    .footer-links a {
+
+        color: var(--text-secondary);
+
+        font-size: 0.875rem;
+
+        transition: color 0.2s;
+
+    }
+
+
+
+    .footer-links a:hover {
+
+        color: var(--text-primary);
+
+    }
+
+
+
+    .footer-bottom {
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        padding-top: 24px;
+
+        border-top: 1px solid var(--border);
+
+        color: var(--text-muted);
+
+        font-size: 0.75rem;
+
+    }
+
+
+
+    .footer-legal {
+
+        display: flex;
+
+        gap: 24px;
+
+    }
+
+
+
+    .footer-legal a {
+
+        color: var(--text-muted);
+
+        transition: color 0.2s;
+
+    }
+
+
+
+    .footer-legal a:hover {
+
+        color: var(--text-primary);
+
+    }
+
+
+
+    /* Utility Classes */
+
+    .visually-hidden {
+
+        position: absolute;
+
+        width: 1px;
+
+        height: 1px;
+
+        padding: 0;
+
+        margin: -1px;
+
+        overflow: hidden;
+
+        clip: rect(0, 0, 0, 0);
+
+        white-space: nowrap;
+
+        border: 0;
+
+    }
+
+
+
+    /* Animation */
+
+    @keyframes fadeInUp {
+
+        from {
+
+            opacity: 0;
+
+            transform: translateY(20px);
+
+        }
+
+        to {
+
+            opacity: 1;
+
+            transform: translateY(0);
+
+        }
+
+    }
+
+
+
+    .section {
+
+        animation: fadeInUp 0.6s ease-out forwards;
+
+    }
+
+
+
+    .section:nth-child(1) { animation-delay: 0.1s; }
+
+    .section:nth-child(2) { animation-delay: 0.2s; }
+
+    .section:nth-child(3) { animation-delay: 0.3s; }
+
+    .section:nth-child(4) { animation-delay: 0.4s; }
+
+    .section:nth-child(5) { animation-delay: 0.5s; }
+
+    .section:nth-child(6) { animation-delay: 0.6s; }
+
+    .section:nth-child(7) { animation-delay: 0.7s; }
+
+    .section:nth-child(8) { animation-delay: 0.8s; }
+
+    .section:nth-child(9) { animation-delay: 0.9s; }
+
+    .section:nth-child(10) { animation-delay: 1s; }
+
+
+
+    /* Placeholder Images */
+
+    .placeholder-img {
+
+        background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        color: var(--text-muted);
+
+        font-size: 2rem;
+
+    }
+
+
+
+    /* Responsive Adjustments */
+
+    @media (max-width: 1024px) {
+
+        .container {
+
+            padding: 0 20px;
+
+        }
+
+    }
+
+
+
+    @media (max-width: 768px) {
+
+        header {
+
+            padding: 16px 0;
+
+        }
+
+
+
+        .nav-links {
+
+            display: none;
+
+        }
+
+
+
+        .section-title {
+
+            font-size: 1.5rem;
+
+        }
+
+
+
+        main {
+
+            padding: 24px 0 60px;
+
+        }
+
+
+
+        .section {
+
+            margin-bottom: 32px;
+
+        }
+
+    }
+
+
+/* Fixed music player */
+body {
+    padding-bottom: 88px;
+}
+
+.music-player {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    height: 78px;
+    background: rgba(15, 18, 24, 0.98);
+    border-top: 1px solid #2a2d33;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.35);
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) minmax(360px, 2fr) minmax(240px, 1fr);
+    align-items: center;
+    gap: 24px;
+    padding: 10px 34px;
+    backdrop-filter: blur(14px);
+}
+
+.player-track {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.player-cover {
+    width: 60px;
+    height: 60px;
+    flex: 0 0 60px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #9bea70 0%, #6c63df 100%);
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.player-song-info {
+    min-width: 0;
+}
+
+.player-song-title {
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-artist {
+    margin-top: 2px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-like {
+    margin-left: 6px;
+    border: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.player-like:hover,
+.player-icon-btn:hover {
+    color: var(--text-primary);
+}
+
+.player-center {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    height: 38px;
+}
+
+.player-icon-btn {
+    border: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 19px;
+    line-height: 1;
+}
+
+.player-play {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 0;
+    background: #f4f5f7;
+    color: #111318;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.player-progress-row {
+    width: 100%;
+    max-width: 690px;
+    display: grid;
+    grid-template-columns: 36px 1fr 36px;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-time {
+    color: #747b87;
+    font-size: 10px;
+    text-align: center;
+}
+
+.player-progress {
+    position: relative;
+    height: 4px;
+    border-radius: 999px;
+    background: #656b72;
+    overflow: hidden;
+}
+
+.player-progress-fill {
+    width: 22%;
+    height: 100%;
+    background: #9bea70;
+    border-radius: inherit;
+}
+
+.player-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+}
+
+.player-volume {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-volume-icon {
+    color: #d5d7dc;
+    font-size: 17px;
+}
+
+.player-volume-bar {
+    width: 105px;
+    height: 5px;
+    border-radius: 999px;
+    background: #70757d;
+    overflow: hidden;
+}
+
+.player-volume-fill {
+    width: 88%;
+    height: 100%;
+    background: #9bea70;
+}
+
+@media (max-width: 900px) {
+    .music-player {
+        grid-template-columns: 1fr 1.4fr;
+        gap: 12px;
+        padding: 8px 16px;
+    }
+
+    .player-right {
+        display: none;
+    }
+
+    .player-controls {
+        gap: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding-bottom: 76px;
+    }
+
+    .music-player {
+        height: 70px;
+        grid-template-columns: 1fr auto;
+        padding: 7px 12px;
+    }
+
+    .player-cover {
+        width: 48px;
+        height: 48px;
+        flex-basis: 48px;
+        border-radius: 9px;
+    }
+
+    .player-song-title {
+        font-size: 13px;
+    }
+
+    .player-artist {
+        font-size: 11px;
+    }
+
+    .player-center {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .player-controls {
+        gap: 9px;
+    }
+
+    .player-icon-btn.skip-btn {
+        display: none;
+    }
+
+    .player-progress-row {
+        display: none;
+    }
+
+    .player-like {
+        display: none;
+    }
+}
+
+
+/* Functional MelodyStream player */
+body { padding-bottom: 112px; }
+.music-player {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: rgba(13, 15, 20, .97);
+    border-top: 1px solid #2b3038;
+    box-shadow: 0 -12px 30px rgba(0,0,0,.35);
+    backdrop-filter: blur(16px);
+}
+.player-inner {
+    max-width: 1500px;
+    margin: 0 auto;
+    min-height: 92px;
+    padding: 12px 22px;
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(340px, 1.7fr) minmax(180px, 1fr);
+    align-items: center;
+    gap: 22px;
+}
+.player-track { min-width: 0; display:flex; align-items:center; gap:12px; }
+.player-art {
+    width:54px; height:54px; flex:0 0 54px; border-radius:12px;
+    display:grid; place-items:center; font-size:24px; color:#111;
+    background:linear-gradient(135deg,#9af26c,#7a6cff);
+}
+.player-meta { min-width:0; }
+.player-title { font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.player-artist { color:var(--text-secondary); font-size:.82rem; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.player-like { border:0; background:none; color:#aeb4bd; cursor:pointer; font-size:20px; }
+.player-like.active { color:#1ed760; }
+.player-center { min-width:0; display:flex; flex-direction:column; gap:8px; }
+.player-buttons { display:flex; justify-content:center; align-items:center; gap:20px; }
+.player-btn { border:0; background:none; color:#dce0e6; cursor:pointer; font-size:17px; width:34px; height:34px; border-radius:50%; display:grid; place-items:center; }
+.player-btn:hover { background:#22262d; }
+.player-play { width:42px; height:42px; background:#f3f5f7; color:#111; font-size:16px; }
+.player-play:hover { background:#fff; transform:scale(1.03); }
+.player-progress { display:grid; grid-template-columns:38px 1fr 38px; gap:9px; align-items:center; font-size:.68rem; color:#8f96a0; }
+.player-progress input[type=range] { width:100%; accent-color:#9af26c; cursor:pointer; }
+.player-right { display:flex; justify-content:flex-end; align-items:center; gap:12px; }
+.volume { width:100px; accent-color:#9af26c; }
+.player-status { position:absolute; left:-9999px; }
+.song-item.playing { background:#20252d; }
+.song-item.playing .song-title { color:#9af26c; }
+.card.playable, .scroll-card.playable { cursor:pointer; }
+.card.playable:hover, .scroll-card.playable:hover { transform:translateY(-4px); }
+@media (max-width: 900px) {
+    .player-inner { grid-template-columns:1fr; gap:8px; padding:10px 14px; }
+    .player-track { display:none; }
+    .player-right { display:none; }
+    .player-center { width:100%; }
+    body { padding-bottom:92px; }
+    .player-buttons { gap:14px; }
+}
+
+
+        .song-item { position: relative; }
+        .song-item.song-unavailable { opacity: 0.55; cursor: not-allowed; }
+        .song-item.song-unavailable:hover { transform: none; }
+        .song-status { margin-left: auto; font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; }
+
+@media (max-width: 900px) {
+    .player-seek-btn { width: 30px; font-size: 11px; }
+    .player-buttons { gap: 8px; }
+}
+
+/* Spotify-style seek/progress bar */
+.player-progress input[type="range"] {
+    --progress: 0%;
+    width: 100%;
+    height: 5px;
+    margin: 0;
+    padding: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    border-radius: 999px;
+    outline: none;
+    cursor: pointer;
+    background: linear-gradient(
+        to right,
+        #9af26c 0%,
+        #9af26c var(--progress),
+        #5b6068 var(--progress),
+        #5b6068 100%
+    );
+}
+
+.player-progress input[type="range"]::-webkit-slider-runnable-track {
+    height: 5px;
+    border-radius: 999px;
+    background: transparent;
+}
+
+.player-progress input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-top: -5.5px;
+    border: 0;
+    border-radius: 50%;
+    background: #9af26c;
+    box-shadow: 0 0 0 1px rgba(154,242,108,.08);
+}
+
+.player-progress input[type="range"]::-moz-range-track {
+    height: 5px;
+    border: 0;
+    border-radius: 999px;
+    background: #5b6068;
+}
+
+.player-progress input[type="range"]::-moz-range-progress {
+    height: 5px;
+    border-radius: 999px;
+    background: #9af26c;
+}
+
+.player-progress input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border: 0;
+    border-radius: 50%;
+    background: #9af26c;
+    cursor: pointer;
+}
+
+/* Visible music seek bar */
+.player-center {
+    min-width: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 9px;
+}
+
+.player-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.player-progress {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 38px minmax(120px, 1fr) 38px;
+    align-items: center;
+    gap: 9px;
+}
+
+.player-progress .player-time {
+    color: #8f96a0;
+    font-size: 10px;
+    text-align: center;
+    line-height: 1;
+}
+
+.player-progress input[type="range"] {
+    --progress: 0%;
+    display: block;
+    width: 100%;
+    height: 5px;
+    margin: 0;
+    padding: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    outline: none;
+    border-radius: 999px;
+    cursor: pointer;
+    background: linear-gradient(
+        to right,
+        #9af26c 0%,
+        #9af26c var(--progress),
+        #5b6068 var(--progress),
+        #5b6068 100%
+    );
+}
+
+.player-progress input[type="range"]::-webkit-slider-runnable-track {
+    height: 5px;
+    border-radius: 999px;
+    background: transparent;
+}
+
+.player-progress input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-top: -5.5px;
+    border: 0;
+    border-radius: 50%;
+    background: #9af26c;
+    cursor: grab;
+}
+
+.player-progress input[type="range"]:active::-webkit-slider-thumb {
+    cursor: grabbing;
+    transform: scale(1.12);
+}
+
+.player-progress input[type="range"]::-moz-range-track {
+    height: 5px;
+    border: 0;
+    border-radius: 999px;
+    background: #5b6068;
+}
+
+.player-progress input[type="range"]::-moz-range-progress {
+    height: 5px;
+    border-radius: 999px;
+    background: #9af26c;
+}
+
+.player-progress input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border: 0;
+    border-radius: 50%;
+    background: #9af26c;
+    cursor: grab;
+}
+
+@media (max-width: 900px) {
+    .player-center {
+        width: 100%;
+    }
+    .player-progress {
+        grid-template-columns: 32px minmax(100px, 1fr) 32px;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 600px) {
+    .player-progress {
+        display: grid;
+    }
+}
+</style>
+</head>
+<body>
+
+
+
+
+
+<header>
+
+    <div class="container header-content">
+
+        <a href="#" class="logo">MelodyStream</a>
+
+        <nav>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="browse.html">Browse</a></li>
+
+                <li><a href="radio.html">Radio</a></li>
+
+                <li><a href="library.html">Library</a></li>
+
+                <li><a href="search.html">Search</a></li>
+
+            </ul>
+
+        </nav>
+
+        <div class="user-actions">
+
+            <button class="btn btn-secondary">Sign In</button>
+
+            <button class="btn btn-primary">Try Free</button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<main class="container">
+
+    <!-- New & Updated Section -->
+
+    <section class="section" aria-labelledby="new-updated-title">
+
+        <div class="section-header">
+
+            <h2 id="new-updated-title" class="section-title">New & Updated</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="card-grid" role="list">
+
+            <!-- Card 1 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a5c2e 0%, #0d3b1e
+100%);" aria-hidden="true">🎵</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-new">NEW</span>
+
+                    <h3 class="card-title">Fresh Sounds</h3>
+
+                    <p class="card-subtitle">MelodyStream Reggae</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 2 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c1a1a 0%, #3b0d0d
+100%);" aria-hidden="true">🎧</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-album">ALBUM</span>
+
+                    <h3 class="card-title">Just Dropped</h3>
+
+                    <p class="card-subtitle">Global Hits</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 3 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a3c5c 0%, #0d243b
+100%);" aria-hidden="true">📈</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-updated">UPDATED</span>
+
+                    <h3 class="card-title">Trending Now</h3>
+
+                    <p class="card-subtitle">Today's Top Hits</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 4 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #3d1a5c 0%, #240d3b
+100%);" aria-hidden="true">🎤</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-new">NEW</span>
+
+                    <h3 class="card-title">Weekly Update</h3>
+
+                    <p class="card-subtitle">Rap Life</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 5 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a5c4a 0%, #0d3b2e
+100%);" aria-hidden="true">🎸</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-new">NEW</span>
+
+                    <h3 class="card-title">Fresh Vibes</h3>
+
+                    <p class="card-subtitle">Indie Vibes</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 6 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c4a1a 0%, #3b2e0d
+100%);" aria-hidden="true">🔥</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-hot">HOT</span>
+
+                    <h3 class="card-title">Popular Now</h3>
+
+                    <p class="card-subtitle">Pop Rising</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 7 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c1a3d 0%, #3b0d24
+100%);" aria-hidden="true">💃</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-new">NEW</span>
+
+                    <h3 class="card-title">Updated Mix</h3>
+
+                    <p class="card-subtitle">Dance Hits</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 8 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a4a5c 0%, #0d2e3b
+100%);" aria-hidden="true">🎤</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-album">ALBUM</span>
+
+                    <h3 class="card-title">New Artist</h3>
+
+                    <p class="card-subtitle">Fresh Voices</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 9 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #2d1a5c 0%, #1b0d3b
+100%);" aria-hidden="true">🌙</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-new">NEW</span>
+
+                    <h3 class="card-title">Daily Mix</h3>
+
+                    <p class="card-subtitle">Chill Mode</p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Card 10 -->
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #4a5c1a 0%, #2e3b0d
+100%);" aria-hidden="true">✨</div>
+
+                <div class="card-content">
+
+                    <span class="card-tag tag-updated">UPDATED</span>
+
+                    <h3 class="card-title">Editor's Pick</h3>
+
+                    <p class="card-subtitle">Hits India</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Recently Played Section -->
+
+    <section class="section" aria-labelledby="recently-played-title">
+
+        <div class="section-header">
+
+            <h2 id="recently-played-title" class="section-title">Recently Played</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="scroll-container" role="list">
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #1a1a2e 0%,
+#16213e 100%);" aria-hidden="true">🌃</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Night Drive</h3>
+
+                    <p class="scroll-card-subtitle">Synthwave</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #0f3460 0%,
+#1a1a2e 100%);" aria-hidden="true">🎹</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Peaceful Piano</h3>
+
+                    <p class="scroll-card-subtitle">Instrumental</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #e94560 0%,
+#1a1a2e 100%);" aria-hidden="true">💪</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Workout Hits</h3>
+
+                    <p class="scroll-card-subtitle">Energy</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #1a1a2e 0%,
+#0f3460 100%);" aria-hidden="true">☕</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Chill Beats</h3>
+
+                    <p class="scroll-card-subtitle">Lo-Fi</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #16213e 0%,
+#0f3460 100%);" aria-hidden="true">🏃</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Morning Run</h3>
+
+                    <p class="scroll-card-subtitle">Fitness</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #1a1a2e 0%,
+#16213e 100%);" aria-hidden="true">🎷</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Jazz Café</h3>
+
+                    <p class="scroll-card-subtitle">Jazz</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #0f3460 0%,
+#1a1a2e 100%);" aria-hidden="true">🧠</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Deep Focus</h3>
+
+                    <p class="scroll-card-subtitle">Study</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="scroll-card" role="listitem">
+
+                <div class="scroll-card-image placeholder-img" style="background: linear-gradient(135deg, #16213e 0%,
+#0f3460 100%);" aria-hidden="true">🌙</div>
+
+                <div class="scroll-card-content">
+
+                    <h3 class="scroll-card-title">Late Night</h3>
+
+                    <p class="scroll-card-subtitle">Pop</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Latest Songs Section -->
+
+    <section class="section" aria-labelledby="latest-songs-title">
+        <div class="section-header">
+            <h2 id="latest-songs-title" class="section-title">Latest Songs</h2>
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <div class="two-column-grid">
+            <div class="song-list" role="list" aria-label="Latest Songs">
+                <div class="song-item" role="listitem" data-song-title="Starboy" tabindex="0">
+                    <span class="song-number">1</span>
+                    <div class="song-info">
+                        <div class="song-title">Starboy</div>
+                        <div class="song-artist">The Weeknd</div>
+                    </div>
+                    <span class="song-duration">—</span>
+                    
+                </div>
+                <div class="song-item song-unavailable" role="listitem" data-song-title="All The Stars">
+                    <span class="song-number">2</span>
+                    <div class="song-info">
+                        <div class="song-title">All The Stars</div>
+                        <div class="song-artist">Kendrick Lamar &amp; SZA</div>
+                    </div>
+                    <span class="song-duration">—</span>
+                </div>
+                <div class="song-item song-unavailable" role="listitem" data-song-title="Shape of You">
+                    <span class="song-number">3</span>
+                    <div class="song-info">
+                        <div class="song-title">Shape of You</div>
+                        <div class="song-artist">Ed Sheeran</div>
+                    </div>
+                    <span class="song-duration">—</span>
+                </div>
+                <div class="song-item" role="listitem" data-song-title="Love Nwantiti" tabindex="0">
+                    <span class="song-number">4</span>
+                    <div class="song-info">
+                        <div class="song-title">Love Nwantiti</div>
+                        <div class="song-artist">CKay</div>
+                    </div>
+                    <span class="song-duration">—</span>
+                    
+                </div>
+                <div class="song-item song-unavailable" role="listitem" data-song-title="Runaway">
+                    <span class="song-number">5</span>
+                    <div class="song-info">
+                        <div class="song-title">Runaway</div>
+                        <div class="song-artist">AURORA</div>
+                    </div>
+                    <span class="song-duration">—</span>
+                </div>
+            </div>
+
+            <div class="song-list" role="list" aria-label="Latest Songs continued">
+                <div class="song-item" role="listitem" data-song-title="Golden Brown" tabindex="0">
+                    <span class="song-number">11</span>
+                    <div class="song-info">
+                        <div class="song-title">Golden Brown</div>
+                        <div class="song-artist">The Stranglers</div>
+                    </div>
+                    <span class="song-duration">—</span>
+                    
+                </div>
+                <div class="song-item song-unavailable" role="listitem" data-song-title="Love Story">
+                    <span class="song-number">12</span>
+                    <div class="song-info">
+                        <div class="song-title">Love Story</div>
+                        <div class="song-artist">Indila</div>
+                    </div>
+                    <span class="song-duration">—</span>
+                </div>
+                <div class="song-item" role="listitem" data-song-title="Sweater Weather" tabindex="0">
+                    <span class="song-number">13</span>
+                    <div class="song-info">
+                        <div class="song-title">Sweater Weather</div>
+                        <div class="song-artist">The Neighbourhood</div>
+                    </div>
+                    <span class="song-duration">—</span>
+                    
+                </div>
+                <div class="song-item song-unavailable" role="listitem" data-song-title="Blinding Lights">
+                    <span class="song-number">14</span>
+                    <div class="song-info">
+                        <div class="song-title">Blinding Lights</div>
+                        <div class="song-artist">The Weeknd</div>
+                    </div>
+                    <span class="song-duration">—</span>
+                </div>
+                <div class="song-item" role="listitem" data-song-title="São Paulo" tabindex="0">
+                    <span class="song-number">15</span>
+                    <div class="song-info">
+                        <div class="song-title">São Paulo</div>
+                        <div class="song-artist">The Weeknd ft. Anitta</div>
+                    </div>
+                    <span class="song-duration">—</span>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Favorite Music Section -->
+
+    <section class="section" aria-labelledby="favorite-music-title">
+
+        <div class="section-header">
+
+            <h2 id="favorite-music-title" class="section-title">Favorite Music</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="favorite-grid" role="list">
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);"
+aria-hidden="true">❤️</div>
+
+                <h3 class="favorite-title">Top Hits</h3>
+
+                <p class="favorite-subtitle">Love</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #ff9f43 0%, #ee8a33 100%);"
+aria-hidden="true">💕</div>
+
+                <h3 class="favorite-title">Romantic</h3>
+
+                <p class="favorite-subtitle">Love</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #54a0ff 0%, #3d8ce8 100%);"
+aria-hidden="true">🎤</div>
+
+                <h3 class="favorite-title">Hip-Hop</h3>
+
+                <p class="favorite-subtitle">Rap</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #5f27cd 0%, #4a1db8 100%);"
+aria-hidden="true">🎪</div>
+
+                <h3 class="favorite-title">EDM Party</h3>
+
+                <p class="favorite-subtitle">Dance</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);"
+aria-hidden="true">🌹</div>
+
+                <h3 class="favorite-title">Romantic</h3>
+
+                <p class="favorite-subtitle">Love</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #00d2d3 0%, #00b8b9 100%);"
+aria-hidden="true">🎻</div>
+
+                <h3 class="favorite-title">Classical</h3>
+
+                <p class="favorite-subtitle">Calm</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #ff9f43 0%, #ee8a33 100%);"
+aria-hidden="true">📻</div>
+
+                <h3 class="favorite-title">Throwback</h3>
+
+                <p class="favorite-subtitle">90s</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #54a0ff 0%, #3d8ce8 100%);"
+aria-hidden="true">😢</div>
+
+                <h3 class="favorite-title">Sad Songs</h3>
+
+                <p class="favorite-subtitle">Mood</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #5f27cd 0%, #4a1db8 100%);"
+aria-hidden="true">🎬</div>
+
+                <h3 class="favorite-title">Bollywood Hits</h3>
+
+                <p class="favorite-subtitle">Indian</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #00d2d3 0%, #00b8b9 100%);"
+aria-hidden="true">🎊</div>
+
+                <h3 class="favorite-title">Punjabi Vibes</h3>
+
+                <p class="favorite-subtitle">Desi</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);"
+aria-hidden="true">✨</div>
+
+                <h3 class="favorite-title">Pop Forever</h3>
+
+                <p class="favorite-subtitle">Pop</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #ff9f43 0%, #ee8a33 100%);"
+aria-hidden="true">🎸</div>
+
+                <h3 class="favorite-title">Rock Legends</h3>
+
+                <p class="favorite-subtitle">Rock</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #54a0ff 0%, #3d8ce8 100%);"
+aria-hidden="true">🌃</div>
+
+                <h3 class="favorite-title">Late Night EDM</h3>
+
+                <p class="favorite-subtitle">Dance</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #5f27cd 0%, #4a1db8 100%);"
+aria-hidden="true">💔</div>
+
+                <h3 class="favorite-title">Heartbreak</h3>
+
+                <p class="favorite-subtitle">Mood</p>
+
+            </article>
+
+
+
+            <article class="favorite-card" role="listitem">
+
+                <div class="favorite-icon" style="background: linear-gradient(135deg, #00d2d3 0%, #00b8b9 100%);"
+aria-hidden="true">✈️</div>
+
+                <h3 class="favorite-title">Travel Songs</h3>
+
+                <p class="favorite-subtitle">Journey</p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Recommendations Section -->
+
+    <section class="section" aria-labelledby="recommendations-title">
+
+        <div class="section-header">
+
+            <h2 id="recommendations-title" class="section-title">Recommendations</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="card-grid" role="list">
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a3c5c 0%, #0d243b
+100%);" aria-hidden="true">🧠</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Focus Flow</h3>
+
+                    <p class="card-subtitle">Work</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #3d1a5c 0%, #240d3b
+100%);" aria-hidden="true">📈</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Viral Hits</h3>
+
+                    <p class="card-subtitle">Trending</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a5c4a 0%, #0d3b2e
+100%);" aria-hidden="true">🎵</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Indie Radar</h3>
+
+                    <p class="card-subtitle">New</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c4a1a 0%, #3b2e0d
+100%);" aria-hidden="true">☕</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Chillhop</h3>
+
+                    <p class="card-subtitle">Relax</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c1a3d 0%, #3b0d24
+100%);" aria-hidden="true">🎉</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Party Mix</h3>
+
+                    <p class="card-subtitle">Dance</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a4a5c 0%, #0d2e3b
+100%);" aria-hidden="true">🎸</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Acoustic</h3>
+
+                    <p class="card-subtitle">Soft</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #2d1a5c 0%, #1b0d3b
+100%);" aria-hidden="true">🌍</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Global Top</h3>
+
+                    <p class="card-subtitle">Charts</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #4a5c1a 0%, #2e3b0d
+100%);" aria-hidden="true">🌙</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Late Vibes</h3>
+
+                    <p class="card-subtitle">Night</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- New Arrivals Section -->
+
+    <section class="section" aria-labelledby="new-arrivals-title">
+
+        <div class="section-header">
+
+            <h2 id="new-arrivals-title" class="section-title">New Arrivals</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="card-grid" role="list">
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a3c5c 0%, #0d243b
+100%);" aria-hidden="true">🆕</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Fresh Beats</h3>
+
+                    <p class="card-subtitle">2025</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #3d1a5c 0%, #240d3b
+100%);" aria-hidden="true">🎵</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">New Indie</h3>
+
+                    <p class="card-subtitle">Trending</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a5c4a 0%, #0d3b2e
+100%);" aria-hidden="true">📈</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Pop Rising</h3>
+
+                    <p class="card-subtitle">Charts</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c4a1a 0%, #3b2e0d
+100%);" aria-hidden="true">🎸</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Rock Now</h3>
+
+                    <p class="card-subtitle">Rock</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c1a3d 0%, #3b0d24
+100%);" aria-hidden="true">🎧</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">EDM Drop</h3>
+
+                    <p class="card-subtitle">Dance</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a4a5c 0%, #0d2e3b
+100%);" aria-hidden="true">🎤</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Indie Pop</h3>
+
+                    <p class="card-subtitle">Fresh</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #2d1a5c 0%, #1b0d3b
+100%);" aria-hidden="true">🌍</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Global</h3>
+
+                    <p class="card-subtitle">World</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #4a5c1a 0%, #2e3b0d
+100%);" aria-hidden="true">🎤</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">New Rap</h3>
+
+                    <p class="card-subtitle">Hip-Hop</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Liked Songs Section -->
+
+    <section class="section" aria-labelledby="liked-songs-title">
+
+        <div class="section-header">
+
+            <h2 id="liked-songs-title" class="section-title">Liked Songs</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="card-grid" role="list">
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a
+100%);" aria-hidden="true">❤️</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">My Favorites</h3>
+
+                    <p class="card-subtitle">Personal</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #54a0ff 0%, #3d8ce8
+100%);" aria-hidden="true">📊</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Top Played</h3>
+
+                    <p class="card-subtitle">Personal</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #ff9f43 0%, #ee8a33
+100%);" aria-hidden="true">💕</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Love Songs</h3>
+
+                    <p class="card-subtitle">Mood</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #00d2d3 0%, #00b8b9
+100%);" aria-hidden="true">☕</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Chill</h3>
+
+                    <p class="card-subtitle">Relax</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5f27cd 0%, #4a1db8
+100%);" aria-hidden="true">💪</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Workout</h3>
+
+                    <p class="card-subtitle">Energy</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e
+100%);" aria-hidden="true">😴</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Sleep</h3>
+
+                    <p class="card-subtitle">Calm</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #16213e 0%, #0f3460
+100%);" aria-hidden="true">🚗</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Road Trip</h3>
+
+                    <p class="card-subtitle">Travel</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e
+100%);" aria-hidden="true">🏆</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Old Gold</h3>
+
+                    <p class="card-subtitle">Classic</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Artist Picks Section -->
+
+    <section class="section" aria-labelledby="artist-picks-title">
+
+        <div class="section-header">
+
+            <h2 id="artist-picks-title" class="section-title">Artist Picks</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="card-grid" role="list">
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a3c5c 0%, #0d243b
+100%);" aria-hidden="true">🎵</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">A.R. Rahman</h3>
+
+                    <p class="card-subtitle">Indian</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #3d1a5c 0%, #240d3b
+100%);" aria-hidden="true">🌟</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">The Weeknd</h3>
+
+                    <p class="card-subtitle">Hits</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a5c4a 0%, #0d3b2e
+100%);" aria-hidden="true">💖</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Taylor Swift</h3>
+
+                    <p class="card-subtitle">Love</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c4a1a 0%, #3b2e0d
+100%);" aria-hidden="true">🎤</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Drake</h3>
+
+                    <p class="card-subtitle">Mood</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c1a3d 0%, #3b0d24
+100%);" aria-hidden="true">💛</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Coldplay</h3>
+
+                    <p class="card-subtitle">Yellow</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a4a5c 0%, #0d2e3b
+100%);" aria-hidden="true">✨</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Dua Lipa</h3>
+
+                    <p class="card-subtitle">Feel</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #2d1a5c 0%, #1b0d3b
+100%);" aria-hidden="true">🎸</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Ed Sheeran</h3>
+
+                    <p class="card-subtitle">Acoustic</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #4a5c1a 0%, #2e3b0d
+100%);" aria-hidden="true">🐉</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Imagine Dragons</h3>
+
+                    <p class="card-subtitle">Rock</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Podcasts Section -->
+
+    <section class="section" aria-labelledby="podcasts-title">
+
+        <div class="section-header">
+
+            <h2 id="podcasts-title" class="section-title">Podcasts</h2>
+
+            <a href="#" class="section-link">View All <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+        </div>
+
+        <div class="card-grid" role="list">
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a3c5c 0%, #0d243b
+100%);" aria-hidden="true">💻</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Tech Talks</h3>
+
+                    <p class="card-subtitle">Technology</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #3d1a5c 0%, #240d3b
+100%);" aria-hidden="true">📰</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Daily News</h3>
+
+                    <p class="card-subtitle">Current</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a5c4a 0%, #0d3b2e
+100%);" aria-hidden="true">🚀</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Startup Stories</h3>
+
+                    <p class="card-subtitle">Business</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c4a1a 0%, #3b2e0d
+100%);" aria-hidden="true">🧘</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Health Hub</h3>
+
+                    <p class="card-subtitle">Wellness</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #5c1a3d 0%, #3b0d24
+100%);" aria-hidden="true">📜</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">History</h3>
+
+                    <p class="card-subtitle">Education</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #1a4a5c 0%, #0d2e3b
+100%);" aria-hidden="true">😂</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Comedy Hour</h3>
+
+                    <p class="card-subtitle">Fun</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #2d1a5c 0%, #1b0d3b
+100%);" aria-hidden="true">🔍</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">True Crime</h3>
+
+                    <p class="card-subtitle">Stories</p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card" role="listitem">
+
+                <div class="card-image placeholder-img" style="background: linear-gradient(135deg, #4a5c1a 0%, #2e3b0d
+100%);" aria-hidden="true">💪</div>
+
+                <div class="card-content">
+
+                    <h3 class="card-title">Motivation</h3>
+
+                    <p class="card-subtitle">Life</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div class="footer-column">
+
+                <h3 class="footer-title">Company</h3>
+
+                <ul class="footer-links">
+
+                    <li><a href="#">About</a></li>
+
+                    <li><a href="#">Careers</a></li>
+
+                    <li><a href="#">Press</a></li>
+
+                    <li><a href="#">Blog</a></li>
+
+                </ul>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h3 class="footer-title">Support</h3>
+
+                <ul class="footer-links">
+
+                    <li><a href="#">Help Center</a></li>
+
+                    <li><a href="#">Community</a></li>
+
+                    <li><a href="#">Accessibility</a></li>
+
+                    <li><a href="#">Contact Us</a></li>
+
+                </ul>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h3 class="footer-title">Legal</h3>
+
+                <ul class="footer-links">
+
+                    <li><a href="#">Privacy Policy</a></li>
+
+                    <li><a href="#">Terms of Service</a></li>
+
+                    <li><a href="#">Cookies</a></li>
+
+                    <li><a href="#">Licensing</a></li>
+
+                </ul>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h3 class="footer-title">Social</h3>
+
+                <ul class="footer-links">
+
+                    <li><a href="#">Instagram</a></li>
+
+                    <li><a href="#">Twitter</a></li>
+
+                    <li><a href="#">Facebook</a></li>
+
+                    <li><a href="#">YouTube</a></li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>© 2026 MelodyStream. All rights reserved.</p>
+
+            <div class="footer-legal">
+
+                <a href="#">Privacy Policy</a>
+
+                <a href="#">Terms of Service</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<div class="music-player" aria-label="Music player">
+    <div class="player-track">
+        <div class="player-cover" aria-hidden="true">A</div>
+        <div class="player-song-info">
+            <div class="player-song-title">Afterglow</div>
+            <div class="player-artist">Nova Vale</div>
+        </div>
+        <button class="player-like" type="button" aria-label="Like song">♡</button>
+    </div>
+
+    <div class="player-center">
+        <div class="player-controls">
+            <button class="player-icon-btn" type="button" aria-label="Previous">↶</button>
+            <button class="player-play" type="button" aria-label="Play or pause">Ⅱ</button>
+            <button class="player-icon-btn" type="button" aria-label="Next">↷</button>
+        </div>
+        <div class="player-progress-row">
+            <span class="player-time">0:46</span>
+            <div class="player-progress" aria-label="Playback progress">
+                <div class="player-progress-fill"></div>
+            </div>
+            <span class="player-time">3:42</span>
+        </div>
+    </div>
+
+    <div class="player-right">
+        <button class="player-icon-btn" type="button" aria-label="Queue">☰</button>
+        <button class="player-icon-btn" type="button" aria-label="Mini player">▣</button>
+        <div class="player-volume">
+            <span class="player-volume-icon" aria-hidden="true">🔊</span>
+            <div class="player-volume-bar" aria-label="Volume">
+                <div class="player-volume-fill"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(() => {
+    const playButton = document.querySelector('.player-play');
+    if (!playButton) return;
+
+    let playing = true;
+    playButton.addEventListener('click', () => {
+        playing = !playing;
+        playButton.textContent = playing ? 'Ⅱ' : '▶';
+        playButton.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    });
+})();
+</script>
+
+
+<div class="music-player" id="musicPlayer">
+  <div class="player-inner">
+    <div class="player-track">
+      <div class="player-art" id="playerArt">♪</div>
+      <div class="player-meta">
+        <div class="player-title" id="playerTitle">Select a song</div>
+        <div class="player-artist" id="playerArtist">Click any song to start playing</div>
+      </div>
+      <button class="player-like" id="likeBtn" aria-label="Like song">♡</button>
+    </div>
+
+    <div class="player-center">
+      <div class="player-buttons">
+        <button class="player-btn" id="shuffleBtn" aria-label="Shuffle">🔀</button>
+        <button class="player-btn" id="prevBtn" aria-label="Previous song">⏮</button>
+        <button class="player-btn" id="back15Btn" aria-label="Back 15 seconds" title="Back 15 seconds">↶ 15</button>
+        <button class="player-btn player-play" id="playBtn" aria-label="Play">▶</button>
+        <button class="player-btn" id="forward15Btn" aria-label="Forward 15 seconds" title="Forward 15 seconds">15 ↷</button>
+        <button class="player-btn" id="nextBtn" aria-label="Next song">⏭</button>
+        <button class="player-btn" id="repeatBtn" aria-label="Repeat">↻</button>
+      </div>
+
+      <div class="player-progress" aria-label="Song progress">
+        <span class="player-time" id="currentTime">0:00</span>
+        <input id="progressBar" type="range" min="0" max="100" value="0" step="0.1"
+               aria-label="Seek through song">
+        <span class="player-time" id="duration">0:00</span>
+      </div>
+    </div>
+
+    <div class="player-right">
+      <button class="player-btn" id="muteBtn" aria-label="Mute">🔊</button>
+      <input class="volume" id="volumeBar" type="range" min="0" max="1" value="0.75" step="0.01" aria-label="Volume">
+    </div>
+  </div>
+  <audio id="audioPlayer" preload="metadata"></audio>
+  <span class="player-status" id="playerStatus" aria-live="polite"></span>
+</div>
+
+<script>
+(() => {
+  const audio = document.getElementById('audioPlayer');
+  const playBtn = document.getElementById('playBtn');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const shuffleBtn = document.getElementById('shuffleBtn');
+  const repeatBtn = document.getElementById('repeatBtn');
+  const back15Btn = document.getElementById('back15Btn');
+  const forward15Btn = document.getElementById('forward15Btn');
+  const progress = document.getElementById('progressBar');
+  const volume = document.getElementById('volumeBar');
+  const muteBtn = document.getElementById('muteBtn');
+  const likeBtn = document.getElementById('likeBtn');
+  const title = document.getElementById('playerTitle');
+  const artist = document.getElementById('playerArtist');
+  const currentTime = document.getElementById('currentTime');
+  const duration = document.getElementById('duration');
+  const status = document.getElementById('playerStatus');
+
+  const songs = [
+    { title: 'Starboy', artist: 'The Weeknd', src: 'audio/starboy.mp3' },
+    { title: 'All The Stars', artist: 'Kendrick Lamar & SZA', src: 'audio/all-the-stars.mp3' },
+    { title: 'Shape of You', artist: 'Ed Sheeran', src: 'audio/shape-of-you.mp3' },
+    { title: 'Love Nwantiti', artist: 'CKay', src: 'audio/love-nwantiti.mp3' },
+    { title: 'Runaway', artist: 'AURORA', src: 'audio/runaway.mp3' },
+    { title: 'Golden Brown', artist: 'The Stranglers', src: 'audio/golden-brown.mp3' },
+    { title: 'Love Story', artist: 'Indila', src: 'audio/love-story.mp3' },
+    { title: 'Sweater Weather', artist: 'The Neighbourhood', src: 'audio/sweater-weather.mp3' },
+    { title: 'Blinding Lights', artist: 'The Weeknd', src: 'audio/blinding-lights.mp3' },
+    { title: 'São Paulo', artist: 'The Weeknd ft. Anitta', src: 'audio/sao-paulo.mp3' }
+  ];
+
+  let currentIndex = -1;
+  let shuffle = false;
+  let repeat = false;
+  let lastVolume = 0.75;
+
+  const formatTime = (seconds) => {
+    if (!Number.isFinite(seconds)) return '0:00';
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  };
+
+  function updatePlayButton() {
+    playBtn.textContent = audio.paused ? '▶' : 'Ⅱ';
+    playBtn.setAttribute('aria-label', audio.paused ? 'Play' : 'Pause');
+  }
+
+  function markPlaying() {
+    document.querySelectorAll('.song-item.playing').forEach(el => el.classList.remove('playing'));
+    if (currentIndex >= 0) {
+      const match = songs[currentIndex];
+      document.querySelectorAll('.song-item').forEach(el => {
+        const t = el.querySelector('.song-title');
+        if (t && t.textContent.trim() === match.title) el.classList.add('playing');
+      });
+    }
+  }
+
+  async function loadSong(index, autoplay = true) {
+    if (!songs.length) return;
+    currentIndex = (index + songs.length) % songs.length;
+    const song = songs[currentIndex];
+
+    audio.src = song.src;
+    title.textContent = song.title;
+    artist.textContent = song.artist;
+    currentTime.textContent = '0:00';
+    duration.textContent = '0:00';
+    progress.value = 0;
+    progress.style.setProperty('--progress', '0%');
+    markPlaying();
+    status.textContent = `Loaded ${song.title}`;
+
+    if (autoplay) {
+      try {
+        await audio.play();
+      } catch (err) {
+        status.textContent = 'Press play to start audio';
+      }
+    }
+    updatePlayButton();
+  }
+
+  playBtn.addEventListener('click', async () => {
+    if (currentIndex < 0) {
+      await loadSong(0, true);
+      return;
+    }
+    if (audio.paused) {
+      try { await audio.play(); }
+      catch (err) { status.textContent = 'Audio could not start'; }
+    } else {
+      audio.pause();
+    }
+    updatePlayButton();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex < 0) return loadSong(0, true);
+    loadSong(currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (currentIndex < 0) return loadSong(0, true);
+    if (shuffle) {
+      let next = Math.floor(Math.random() * songs.length);
+      if (songs.length > 1 && next === currentIndex) next = (next + 1) % songs.length;
+      loadSong(next, true);
+    } else {
+      loadSong(currentIndex + 1, true);
+    }
+  });
+
+  shuffleBtn.addEventListener('click', () => {
+    shuffle = !shuffle;
+    shuffleBtn.classList.toggle('active', shuffle);
+  });
+
+  repeatBtn.addEventListener('click', () => {
+    repeat = !repeat;
+    repeatBtn.classList.toggle('active', repeat);
+  });
+
+  back15Btn.addEventListener('click', () => {
+    if (Number.isFinite(audio.duration)) {
+      audio.currentTime = Math.max(0, audio.currentTime - 15);
+    }
+  });
+
+  forward15Btn.addEventListener('click', () => {
+    if (Number.isFinite(audio.duration)) {
+      audio.currentTime = Math.min(audio.duration, audio.currentTime + 15);
+    }
+  });
+
+  audio.addEventListener('loadedmetadata', () => {
+    duration.textContent = formatTime(audio.duration);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    if (audio.duration) {
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progress.value = percent;
+      progress.style.setProperty('--progress', `${percent}%`);
+    }
+    currentTime.textContent = formatTime(audio.currentTime);
+  });
+
+  // Drag/click anywhere on the progress bar to jump to an exact position,
+  // e.g. from 1:03 directly to 3:15.
+  progress.addEventListener('input', () => {
+    const percent = Number(progress.value);
+    progress.style.setProperty('--progress', `${percent}%`);
+    if (audio.duration) {
+      audio.currentTime = (percent / 100) * audio.duration;
+    }
+  });
+
+  volume.addEventListener('input', () => {
+    audio.volume = Number(volume.value);
+    if (audio.volume > 0) lastVolume = audio.volume;
+    audio.muted = audio.volume === 0;
+    muteBtn.textContent = audio.muted ? '🔇' : '🔊';
+  });
+
+  muteBtn.addEventListener('click', () => {
+    if (audio.muted || audio.volume === 0) {
+      audio.muted = false;
+      audio.volume = lastVolume || 0.75;
+      volume.value = audio.volume;
+      muteBtn.textContent = '🔊';
+    } else {
+      lastVolume = audio.volume;
+      audio.muted = true;
+      muteBtn.textContent = '🔇';
+    }
+  });
+
+  likeBtn.addEventListener('click', () => {
+    likeBtn.classList.toggle('active');
+    likeBtn.textContent = likeBtn.classList.contains('active') ? '♥' : '♡';
+  });
+
+  audio.addEventListener('play', updatePlayButton);
+  audio.addEventListener('pause', updatePlayButton);
+  audio.addEventListener('ended', () => {
+    if (repeat) {
+      audio.currentTime = 0;
+      audio.play();
+    } else {
+      nextBtn.click();
+    }
+  });
+
+  audio.volume = 0.75;
+
+  // Event delegation: these continue working after Home/Browse/Radio/etc.
+  // replace the <main> content.
+  document.addEventListener('click', (event) => {
+    const item = event.target.closest('.song-item');
+    if (item) {
+      const songTitle = item.querySelector('.song-title');
+      if (!songTitle) return;
+      const idx = songs.findIndex(s => s.title === songTitle.textContent.trim());
+      if (idx !== -1) loadSong(idx, true);
+      return;
+    }
+
+    const card = event.target.closest('.card, .scroll-card');
+    if (!card) return;
+
+    const nameEl = card.querySelector('.card-title, .scroll-card-title');
+    const subEl = card.querySelector('.card-subtitle, .scroll-card-subtitle');
+    if (!nameEl) return;
+
+    const name = nameEl.textContent.trim();
+    const excluded = new Set([
+      'Tech Talks','Daily News','Startup Stories','Health Hub',
+      'History','Comedy Hour','True Crime','Motivation'
+    ]);
+    if (excluded.has(name)) return;
+
+    const idx = Math.abs(name.split('').reduce((a,c) => a + c.charCodeAt(0), 0)) % songs.length;
+    title.textContent = name;
+    artist.textContent = subEl ? `${subEl.textContent.trim()} • Demo audio` : songs[idx].artist;
+    loadSong(idx, true);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.target.closest('input, textarea, button, a')) return;
+    const item = event.target.closest('.song-item');
+    if (item && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault();
+      item.click();
+    }
+  });
+})();
+</script>
+
+
+<script>
+(() => {
+  // Keep the audio/player alive while switching Home/Browse/Radio/Library/Search.
+  // Only the <main> content is replaced; the fixed player and its <audio> element stay alive.
+  const navLinks = document.querySelectorAll('header a[href$=".html"]');
+
+  async function navigateWithoutReload(url, push = true) {
+    try {
+      const response = await fetch(url, { headers: { 'X-MelodyStream-SPA': '1' } });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const html = await response.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const newMain = doc.querySelector('main');
+      const currentMain = document.querySelector('main');
+
+      if (!newMain || !currentMain) {
+        window.location.href = url;
+        return;
+      }
+
+      currentMain.replaceWith(newMain);
+
+      if (push) history.pushState({ melodyStreamPage: url }, '', url);
+
+      document.title = doc.title;
+      window.scrollTo({ top: 0, behavior: 'instant' });
+
+      // Refresh active nav state without touching the player/audio.
+      document.querySelectorAll('header nav a').forEach(a => {
+        const same = new URL(a.href, location.href).pathname === new URL(url, location.href).pathname;
+        a.classList.toggle('active', same);
+      });
+    } catch (error) {
+      // If opened directly from file://, fetch may be blocked. Normal navigation still works.
+      window.location.href = url;
+    }
+  }
+
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('header nav a[href$=".html"]');
+    if (!link) return;
+
+    const url = link.href;
+    const target = new URL(url, location.href);
+
+    if (target.origin !== location.origin) return;
+    event.preventDefault();
+
+    if (target.pathname === location.pathname) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    navigateWithoutReload(url, true);
+  });
+
+  window.addEventListener('popstate', () => {
+    navigateWithoutReload(location.href, false);
+  });
+})();
+</script>
+
+</body>
+</html>
