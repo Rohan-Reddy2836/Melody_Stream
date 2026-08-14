@@ -1438,18 +1438,186 @@ body { padding-bottom: 112px; }
         .song-item.song-unavailable:hover { transform: none; }
         .song-status { margin-left: auto; font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; }
 
-/* Extra seek controls */
-.player-seek-btn {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: -.2px;
-}
-.player-seek-btn:hover {
-    color: #9af26c;
-}
 @media (max-width: 900px) {
     .player-seek-btn { width: 30px; font-size: 11px; }
     .player-buttons { gap: 8px; }
+}
+
+/* Spotify-style seek/progress bar */
+.player-progress input[type="range"] {
+    --progress: 0%;
+    width: 100%;
+    height: 5px;
+    margin: 0;
+    padding: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    border-radius: 999px;
+    outline: none;
+    cursor: pointer;
+    background: linear-gradient(
+        to right,
+        #9af26c 0%,
+        #9af26c var(--progress),
+        #5b6068 var(--progress),
+        #5b6068 100%
+    );
+}
+
+.player-progress input[type="range"]::-webkit-slider-runnable-track {
+    height: 5px;
+    border-radius: 999px;
+    background: transparent;
+}
+
+.player-progress input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-top: -5.5px;
+    border: 0;
+    border-radius: 50%;
+    background: #9af26c;
+    box-shadow: 0 0 0 1px rgba(154,242,108,.08);
+}
+
+.player-progress input[type="range"]::-moz-range-track {
+    height: 5px;
+    border: 0;
+    border-radius: 999px;
+    background: #5b6068;
+}
+
+.player-progress input[type="range"]::-moz-range-progress {
+    height: 5px;
+    border-radius: 999px;
+    background: #9af26c;
+}
+
+.player-progress input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border: 0;
+    border-radius: 50%;
+    background: #9af26c;
+    cursor: pointer;
+}
+
+/* Visible music seek bar */
+.player-center {
+    min-width: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 9px;
+}
+
+.player-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.player-progress {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 38px minmax(120px, 1fr) 38px;
+    align-items: center;
+    gap: 9px;
+}
+
+.player-progress .player-time {
+    color: #8f96a0;
+    font-size: 10px;
+    text-align: center;
+    line-height: 1;
+}
+
+.player-progress input[type="range"] {
+    --progress: 0%;
+    display: block;
+    width: 100%;
+    height: 5px;
+    margin: 0;
+    padding: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    outline: none;
+    border-radius: 999px;
+    cursor: pointer;
+    background: linear-gradient(
+        to right,
+        #9af26c 0%,
+        #9af26c var(--progress),
+        #5b6068 var(--progress),
+        #5b6068 100%
+    );
+}
+
+.player-progress input[type="range"]::-webkit-slider-runnable-track {
+    height: 5px;
+    border-radius: 999px;
+    background: transparent;
+}
+
+.player-progress input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-top: -5.5px;
+    border: 0;
+    border-radius: 50%;
+    background: #9af26c;
+    cursor: grab;
+}
+
+.player-progress input[type="range"]:active::-webkit-slider-thumb {
+    cursor: grabbing;
+    transform: scale(1.12);
+}
+
+.player-progress input[type="range"]::-moz-range-track {
+    height: 5px;
+    border: 0;
+    border-radius: 999px;
+    background: #5b6068;
+}
+
+.player-progress input[type="range"]::-moz-range-progress {
+    height: 5px;
+    border-radius: 999px;
+    background: #9af26c;
+}
+
+.player-progress input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border: 0;
+    border-radius: 50%;
+    background: #9af26c;
+    cursor: grab;
+}
+
+@media (max-width: 900px) {
+    .player-center {
+        width: 100%;
+    }
+    .player-progress {
+        grid-template-columns: 32px minmax(100px, 1fr) 32px;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 600px) {
+    .player-progress {
+        display: grid;
+    }
 }
 </style>
 </head>
@@ -3144,16 +3312,18 @@ stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></
       <div class="player-buttons">
         <button class="player-btn" id="shuffleBtn" aria-label="Shuffle">🔀</button>
         <button class="player-btn" id="prevBtn" aria-label="Previous song">⏮</button>
-        <button class="player-btn player-seek-btn" id="back15Btn" aria-label="Back 15 seconds" title="Back 15 seconds">↶15</button>
+        <button class="player-btn" id="back15Btn" aria-label="Back 15 seconds" title="Back 15 seconds">↶ 15</button>
         <button class="player-btn player-play" id="playBtn" aria-label="Play">▶</button>
-        <button class="player-btn player-seek-btn" id="forward30Btn" aria-label="Forward 30 seconds" title="Forward 30 seconds">30↷</button>
+        <button class="player-btn" id="forward15Btn" aria-label="Forward 15 seconds" title="Forward 15 seconds">15 ↷</button>
         <button class="player-btn" id="nextBtn" aria-label="Next song">⏭</button>
         <button class="player-btn" id="repeatBtn" aria-label="Repeat">↻</button>
       </div>
-      <div class="player-progress">
-        <span id="currentTime">0:00</span>
-        <input id="progressBar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Song progress">
-        <span id="duration">0:00</span>
+
+      <div class="player-progress" aria-label="Song progress">
+        <span class="player-time" id="currentTime">0:00</span>
+        <input id="progressBar" type="range" min="0" max="100" value="0" step="0.1"
+               aria-label="Seek through song">
+        <span class="player-time" id="duration">0:00</span>
       </div>
     </div>
 
@@ -3175,7 +3345,7 @@ stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></
   const shuffleBtn = document.getElementById('shuffleBtn');
   const repeatBtn = document.getElementById('repeatBtn');
   const back15Btn = document.getElementById('back15Btn');
-  const forward30Btn = document.getElementById('forward30Btn');
+  const forward15Btn = document.getElementById('forward15Btn');
   const progress = document.getElementById('progressBar');
   const volume = document.getElementById('volumeBar');
   const muteBtn = document.getElementById('muteBtn');
@@ -3238,6 +3408,7 @@ stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></
     currentTime.textContent = '0:00';
     duration.textContent = '0:00';
     progress.value = 0;
+    progress.style.setProperty('--progress', '0%');
     markPlaying();
     status.textContent = `Loaded ${song.title}`;
 
@@ -3249,16 +3420,6 @@ stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></
       }
     }
     updatePlayButton();
-  }
-
-  function seekBy(seconds) {
-    if (currentIndex < 0 || !Number.isFinite(audio.duration)) return;
-    const target = Math.min(
-      audio.duration,
-      Math.max(0, audio.currentTime + seconds)
-    );
-    audio.currentTime = target;
-    status.textContent = `${formatTime(target)} / ${formatTime(audio.duration)}`;
   }
 
   playBtn.addEventListener('click', async () => {
@@ -3291,9 +3452,6 @@ stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></
     }
   });
 
-  back15Btn.addEventListener('click', () => seekBy(-15));
-  forward30Btn.addEventListener('click', () => seekBy(30));
-
   shuffleBtn.addEventListener('click', () => {
     shuffle = !shuffle;
     shuffleBtn.classList.toggle('active', shuffle);
@@ -3304,20 +3462,38 @@ stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></
     repeatBtn.classList.toggle('active', repeat);
   });
 
+  back15Btn.addEventListener('click', () => {
+    if (Number.isFinite(audio.duration)) {
+      audio.currentTime = Math.max(0, audio.currentTime - 15);
+    }
+  });
+
+  forward15Btn.addEventListener('click', () => {
+    if (Number.isFinite(audio.duration)) {
+      audio.currentTime = Math.min(audio.duration, audio.currentTime + 15);
+    }
+  });
+
   audio.addEventListener('loadedmetadata', () => {
     duration.textContent = formatTime(audio.duration);
   });
 
   audio.addEventListener('timeupdate', () => {
-    if (audio.duration) progress.value = (audio.currentTime / audio.duration) * 100;
+    if (audio.duration) {
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progress.value = percent;
+      progress.style.setProperty('--progress', `${percent}%`);
+    }
     currentTime.textContent = formatTime(audio.currentTime);
   });
 
   // Drag/click anywhere on the progress bar to jump to an exact position,
   // e.g. from 1:03 directly to 3:15.
   progress.addEventListener('input', () => {
+    const percent = Number(progress.value);
+    progress.style.setProperty('--progress', `${percent}%`);
     if (audio.duration) {
-      audio.currentTime = (Number(progress.value) / 100) * audio.duration;
+      audio.currentTime = (percent / 100) * audio.duration;
     }
   });
 
